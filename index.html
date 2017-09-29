@@ -13,9 +13,6 @@
         max-width: 800px;
         width: 90%;
       }
-      .center {
-        text-align: center;
-      }
       h1 {
         font-weight: normal;
         text-rendering: optimizeLegibility;
@@ -24,81 +21,59 @@
   </head>
   <body>
     <div class="page">
-      <h1 class="center">Anatomy of a web page | Tags</h1>
-      <div id="viz-container"></div>
+      <h1>Drawing Circles | Variables, Selections</h1>
+      <br />
+      <h2> Static SVG </h2>
+      <p>
+        We render some plain SVG circles
+      </p>
+      <svg id="svg1" width="720" height="120">
+        <circle cx="40" cy="60" r="10"></circle>
+        <circle cx="80" cy="60" r="10"></circle>
+        <circle cx="120" cy="60" r="10"></circle>
+      </svg>
+      <br />
+      <h2> SVG manipulated by D3</h2>
+      <p>
+        We use D3 to do three things to these circles
+        <ol>
+          <li>Change color to blue</li>
+          <li>Make circles bigger</li>
+          <li>Move them to not overlap</li>
+          <li>Bonus: Make the circles change colors every second</li>
+        </ol>
+      </p>
+      <svg id="svg2" width="720" height="120">
+        <circle cx="40" cy="60" r="10"></circle>
+        <circle cx="80" cy="60" r="10"></circle>
+        <circle cx="120" cy="60" r="10"></circle>
+      </svg>
+      <h2> Exercise: repeat the previous section, but using rectangles!</h2>
+      <svg id="svg3" width="720" height="120">
+      </svg>
     </div>
     <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="randomColor.js"></script>
     <script>
-      var width = 960,
-          height = 500;
+      // Select the empty svg with id "svg2" and select all the circles within
+      var circles = d3.select("#svg2").selectAll("circle");
+      // 1: Color the circles
+      circles.style("fill","steelblue")
+      // 2: Change the radius
+      circles.attr("r","30")
+      // 3: Change the positions
+      circles.attr("cy","50")
+      circles.attr("cx", function(d,i) {
+        return 80*(i+1)
+      })
+      // 4: Bonus (hint - use setInterval)
 
-      var nodes = d3.range(200).map(function() { return {radius: Math.random() * 12 + 4}; }),
-          root = nodes[0],
-          color = d3.scale.category10();
+      setInterval(function(){
+        circles.style("fill",randomColor())
+      }, 1000)
 
-      root.radius = 0;
-      root.fixed = true;
-
-      var force = d3.layout.force()
-          .gravity(0.05)
-          .charge(function(d, i) { return i ? 0 : -2000; })
-          .nodes(nodes)
-          .size([width, height]);
-
-      force.start();
-
-      var svg = d3.select("#viz-container").append("svg")
-          .attr("width", width)
-          .attr("height", height);
-
-      svg.selectAll("circle")
-          .data(nodes.slice(1))
-        .enter().append("circle")
-          .attr("r", function(d) { return d.radius; })
-          .style("fill", function(d, i) { return color(i % 3); });
-
-      force.on("tick", function(e) {
-        var q = d3.geom.quadtree(nodes),
-            i = 0,
-            n = nodes.length;
-
-        while (++i < n) q.visit(collide(nodes[i]));
-
-        svg.selectAll("circle")
-            .attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; });
-      });
-
-      svg.on("mousemove", function() {
-        var p1 = d3.mouse(this);
-        root.px = p1[0];
-        root.py = p1[1];
-        force.resume();
-      });
-
-      function collide(node) {
-        var r = node.radius + 16,
-            nx1 = node.x - r,
-            nx2 = node.x + r,
-            ny1 = node.y - r,
-            ny2 = node.y + r;
-        return function(quad, x1, y1, x2, y2) {
-          if (quad.point && (quad.point !== node)) {
-            var x = node.x - quad.point.x,
-                y = node.y - quad.point.y,
-                l = Math.sqrt(x * x + y * y),
-                r = node.radius + quad.point.radius;
-            if (l < r) {
-              l = (l - r) / l * .5;
-              node.x -= x *= l;
-              node.y -= y *= l;
-              quad.point.x += x;
-              quad.point.y += y;
-            }
-          }
-          return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-        };
-      }
+      // Your code for doing the same thing with rectangles
+      // ...
     </script>
   </body>
 </html>
