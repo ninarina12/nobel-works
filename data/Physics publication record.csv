@@ -1,4 +1,4 @@
-Laureate ID,Laureate name,Prize year,Title,Pub year,Paper ID,DOI,Journal,Affiliation,Is prize-winning paper
+Laureate_ID,Laureate_name,Prize_year,Title,Pub_year,Paper_ID,DOI,Journal,Affiliation,Prize-winning
 10001,"thouless, dj",2016,ordering metastability and phase transitions in two dimensional systems,1973,2086860422,10.1088/0022-3719/6/7/010,journal of physics c solid state physics,university of washington,YES
 10001,"thouless, dj",2016,metastability and phase transitions in two dimensional systems,1973,103749609,,,,NO
 10001,"thouless, dj",2016,from feynman s wave function to the effective theory of vortex dynamics,1994,1967117779,10.1103/PhysRevLett.72.1706,physical review letters,university of washington,NO
