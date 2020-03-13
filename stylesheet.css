@@ -33,7 +33,7 @@
     font-size: 18px
 }
 
-.favorites div{
+.favorites div svg{
     margin: 0 auto;
     width: 50%;
     margin-left: 70px;
@@ -47,7 +47,7 @@
 }
 
 button {
-  position: absolute;
+  position: relative;
   right: 50px;
   top: 10px;
 }
