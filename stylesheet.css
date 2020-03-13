@@ -32,11 +32,6 @@
     font-weight: bold;
     font-size: 18px
 }
-.favorites div svg{
-    margin: 0 auto;
-    width: 50%;
-    margin-left: 70px;
-}
 
 .axis path, .axis line {
   fill: none;
