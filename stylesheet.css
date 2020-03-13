@@ -25,7 +25,10 @@
     color: gray;
 }
 .chart{
-    background: #fff;
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 70%;
 }
 .favorites h4{
     margin-top: 40px;
