@@ -25,12 +25,12 @@ var height = 400 - margin.top - margin.bottom;
 
 var tooltip = d3.select("body")
     .append("div")
-    .attr("class", "remove")
-    .style("position", "absolute")
-    .style("z-index", "20")
-    .style("visibility", "hidden")
-    .style("top", "30px")
-    .style("left", "55px");
+    //.attr("class", "remove")
+    //.style("position", "absolute")
+    //.style("z-index", "20")
+    //.style("visibility", "hidden")
+    //.style("top", "30px")
+    //.style("left", "55px");
 
 var x = d3.time.scale()
     .range([0, width]);
