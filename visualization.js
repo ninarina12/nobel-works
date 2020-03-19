@@ -47,15 +47,15 @@ d3.json("data/data.json", function(error, root) {
       .style("fill", function(d) { return d.children ? "white" : color(d.depth); })
       .attr("dy", function(d) { return -1.02 * d.r; });
 
-  var legend = g.selectAll(".legend")
+  var legend = svg.selectAll(".legend")
       .data(nodes)
-      .enter().append("text")
+      .enter().append("g")
         .attr("class", "legend")
-        //.append("text")
-        .attr("x", -diameter / 2.2)
-        .attr("dy", -diameter / 2.5)
-        .attr("id", "title")
-        .style("font-size", "large");
+        .append("text")
+          .attr("x", -diameter / 3)
+          .attr("dy", 100)
+          .attr("id", "title")
+          .style("font-size", "large");
 
   var node = g.selectAll("circle,text");
 
