@@ -3,6 +3,7 @@
     padding: 3%;
     font-family: 'Open Sans', sans-serif;
 }
+
 .text{
     position: relative;
     float: left;
@@ -13,18 +14,21 @@
     padding-left: 8px;
     padding-right: 8px;
 }
+
 .text p{
     font-weight: normal;
     font-size: 14px;
     text-align: justify;
     color: gray;
 }
+
 .chart{
     position: relative;
     float: left;
     height: 100%;
     width: 70%;
 }
+
 .favorites h4{
     margin-top: 40px;
     font-weight: bold;
@@ -36,3 +40,22 @@
     width: 50%;
     margin-left: 70px;
 }
+
+.node {
+    cursor: pointer;
+}
+.node:hover {
+    stroke: #7E81AD;
+    stroke-width: 1.5px;
+}
+.node--leaf {
+    fill: white;
+}
+.label {
+    font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+}
+.label,
+.node--root,
+.node--leaf {
+    pointer-events: none;
