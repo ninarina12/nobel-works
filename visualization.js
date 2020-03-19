@@ -48,14 +48,24 @@ d3.json("data/data.json", function(error, root) {
       .style("text-shadow", function(d) { return d.children ? null : "0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff, 1px 1px 0 #fff, -1px -1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff"; })
       .attr("dy", function(d) { return -d.r; });
 
-  var legend = svg.selectAll(".legend")
+  var legend1 = svg.selectAll(".legend1")
       .data(nodes)
       .enter().append("g")
         .attr("class", "legend")
         .append("text")
           .attr("x", 100)
           .attr("dy", 100)
-          .attr("id", "title")
+          .attr("id", "title1")
+          .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148");
+
+  var legend2 = svg.selectAll(".legend2")
+      .data(nodes)
+      .enter().append("g")
+        .attr("class", "legend")
+        .append("text")
+          .attr("x", diameter - 100)
+          .attr("dy", diameter - 100)
+          .attr("id", "title2")
           .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148");
 
   var node = g.selectAll("circle,text");
@@ -90,7 +100,12 @@ d3.json("data/data.json", function(error, root) {
   }
 
   function on_mouseover(d) {
-    d3.select('svg #title')
+    d3.select('svg #title1')
+      .text(d.data.name.toUpperCase())      
+      .style("fill", "white")  
+      .transition()       
+      .style('opacity', 1)
+    d3.select('svg #title2')
       .text(d.data.name.toUpperCase())      
       .style("fill", "white")  
       .transition()       
@@ -98,7 +113,11 @@ d3.json("data/data.json", function(error, root) {
   }
   
   function on_mouseout(d) {
-    d3.select('svg #title')      
+    d3.select('svg #title1')      
+      .transition()
+      .duration(150)
+      .style('opacity', 0)
+    d3.select('svg #title2')      
       .transition()
       .duration(150)
       .style('opacity', 0);
