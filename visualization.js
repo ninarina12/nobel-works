@@ -9,7 +9,7 @@ var color = d3.scaleOrdinal()
 
 var pack = d3.pack()
     .size([diameter - margin, diameter - margin])
-    .padding(2);
+    .padding(8);
 
 d3.json("data/data.json", function(error, root) {
   if (error) throw error;
@@ -23,7 +23,7 @@ d3.json("data/data.json", function(error, root) {
       view;
 
   var circle = g.selectAll("circle")
-    .data(nodes)
+    .data(nodes.slice(1))
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
       .style("fill", function(d) { return d.children ? color(d.depth) : null; })
@@ -40,7 +40,7 @@ d3.json("data/data.json", function(error, root) {
   var node = g.selectAll("circle,text");
 
   svg
-      .style("background", color(-1))
+      .style("background", color(0))
       .on("click", function() { zoom(root); });
 
   zoomTo([root.x, root.y, root.r * 2 + margin]);
