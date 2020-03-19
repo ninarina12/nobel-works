@@ -1,171 +1,149 @@
-chart("data/test_data.csv", "orange");
+chart("data/data.json");
 
-var datearray = [];
-var colorrange = [];
+function chart(path) {
 
+var width = 900;
+var height = width;
 
-function chart(csvpath, color) {
+var format = d3.format(",d")
 
-if (color == "blue") {
-  colorrange = ["#045A8D", "#2B8CBE", "#74A9CF", "#A6BDDB", "#D0D1E6", "#F1EEF6"];
-}
-else if (color == "pink") {
-  colorrange = ["#980043", "#DD1C77", "#DF65B0", "#C994C7", "#D4B9DA", "#F1EEF6"];
-}
-else if (color == "orange") {
-  colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
-}
-strokecolor = colorrange[0];
+var color = d3.scaleOrdinal()
+    .domain([0, 1])
+    .range(["#1E2148", "#2A2D58", "#5A5D8D"])
 
-var format = d3.time.format("%m/%d/%y");
+var stars = d3.scaleOrdinal()
+    .domain([0, 1])
+    .range(["#D3B77A", "#9EC6F0", "#1D5A87", "#DE9951"])
 
-var margin = {top: 20, right: 40, bottom: 30, left: 30};
-var width = document.body.clientWidth - margin.left - margin.right;
-var height = 400 - margin.top - margin.bottom;
-
-var tooltip = d3.select("body")
-    .append("div")
-    //.attr("class", "remove")
-    //.style("position", "absolute")
-    //.style("z-index", "20")
-    //.style("visibility", "hidden")
-    //.style("top", "30px")
-    //.style("left", "55px");
-
-var x = d3.time.scale()
-    .range([0, width]);
-
-var y = d3.scale.linear()
-    .range([height-10, 0]);
-
-var z = d3.scale.ordinal()
-    .range(colorrange);
-
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom")
-    .ticks(d3.time.weeks);
-
-var yAxis = d3.svg.axis()
-    .scale(y);
-
-var yAxisr = d3.svg.axis()
-    .scale(y);
-
-var stack = d3.layout.stack()
-    .offset("silhouette")
-    .values(function(d) { return d.values; })
-    .x(function(d) { return d.date; })
-    .y(function(d) { return d.value; });
-
-var nest = d3.nest()
-    .key(function(d) { return d.key; });
-
-var area = d3.svg.area()
-    .interpolate("cardinal")
-    .x(function(d) { return x(d.date); })
-    .y0(function(d) { return y(d.y0); })
-    .y1(function(d) { return y(d.y0 + d.y); });
-
-var svg = d3.select(".chart").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-var graph = d3.csv(csvpath, function(data) {
-  data.forEach(function(d) {
-    d.date = format.parse(d.date);
-    d.value = +d.value;
-  });
-
-  var layers = stack(nest.entries(data));
-
-  x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
-
-  svg.selectAll(".layer")
-      .data(layers)
-    .enter().append("path")
-      .attr("class", "layer")
-      .attr("d", function(d) { return area(d.values); })
-      .style("fill", function(d, i) { return z(i); });
+function pack(data) {
+   return d3.pack().size([width, height]).padding(8)
+  (d3.hierarchy(data)
+    .sum(function(d) {return Math.sqrt(d.value)} )
+    .sort(function(a, b) {return (b.value - a.value)} ))
+};
 
 
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+var graph = d3.json(path, function(data) {
 
-  svg.append("g")
-      .attr("class", "y axis")
-      .attr("transform", "translate(" + width + ", 0)")
-      .call(yAxis.orient("right"));
+  var root = pack(data);
+  let focus = root;
+  let view;
 
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis.orient("left"));
-
-  svg.selectAll(".layer")
-    .attr("opacity", 1)
-    .on("mouseover", function(d, i) {
-      svg.selectAll(".layer").transition()
-      .duration(250)
-      .attr("opacity", function(d, j) {
-        return j != i ? 0.6 : 1;
-    })})
-
-    .on("mousemove", function(d, i) {
-      mousex = d3.mouse(this);
-      mousex = mousex[0];
-      var invertedx = x.invert(mousex);
-      invertedx = invertedx.getMonth() + invertedx.getDate();
-      var selected = (d.values);
-      for (var k = 0; k < selected.length; k++) {
-        datearray[k] = selected[k].date
-        datearray[k] = datearray[k].getMonth() + datearray[k].getDate();
-      }
-
-      mousedate = datearray.indexOf(invertedx);
-      pro = d.values[mousedate].value;
-
-      d3.select(this)
-      .classed("hover", true)
-      .attr("stroke", strokecolor)
-      .attr("stroke-width", "0.5px"), 
-      tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "visible");
+  var svg = d3.create("svg")
+      .attr("viewBox", `-${width / 2} -${height / 2} ${width} ${height}`)
+      .style("display", "block")
+      .style("margin", "0px")
+      .style("background", color(0))
+      .style("cursor", "pointer")
+      .on("click", () => zoom(root));
+  
+  var node = svg.append("g")
+    .selectAll("circle")
+    .data(root.descendants().slice(4))
+    .join("circle")
+      .attr("fill", d => d.children ? color(d.depth) : "white")
+      .attr("stroke", d => d.children ? null : stars(d.r))
+      .attr("stroke-width", 2)
+      .attr("pointer-events", d => !d.children ? "none" : null)
+      .on("mouseover", on_mouseover)
+      .on("mouseout", on_mouseout)
+      .on("click", d => focus !== d && (zoom(d), d3.event.stopPropagation()));
       
-    })
-    .on("mouseout", function(d, i) {
-     svg.selectAll(".layer")
+  
+  var label = svg.append("g")
+    .style("font", "10px sans-serif")
+    .attr("pointer-events", "none")
+    .attr("text-anchor", "middle")
+    .selectAll("text")
+    .data(root.descendants())
+    .join("text")
+      .style("fill-opacity", d => d.parent === root ? 1 : 0)
+      .style("display", d => d.parent === root ? "inline" : "none")
+      .text(d => d.children ? d.data.name.toUpperCase() : d.data.name.toUpperCase() + ": " + d.data.value)
+      .attr("fill", d => d.children ? "white" : color(d.depth))
+      .attr("dy", d => -d.r)
+      .attr("font-family", "Skia")
+      .style('font-size', 'small')
+      .style("font-weight", "bold");
+  
+  zoomTo([root.x, root.y, root.r * 2]);
+  
+  var legend = svg.selectAll(".legend")
+      .data(root.descendants())
+      .enter().append("g")
+      .attr("class", "legend")
+  
+  legend.append("text")
+      .attr("x", -width/2.2)
+      .attr("dy", -height/2.5)
+      .attr("id", "title")
+      .attr("font-family", "Skia")
+      .style("font-size", "small")
+      .style("font-weight", "bold");
+  
+  function on_mouseover(d) {
+    d3.select(this).attr("stroke", "#7E81AD").attr("stroke-width", 2)
+    d3.select('svg #title')
+      .text(d.data.name.toUpperCase())      
+      .style("fill", "white")  
+      .transition()       
+      .style('opacity', 1);
+  }
+  
+  function on_mouseout(d) {
+    d3.select(this).attr("stroke", null)
+    d3.select('svg #title')      
       .transition()
-      .duration(250)
-      .attr("opacity", "1");
-      d3.select(this)
-      .classed("hover", false)
-      .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "hidden");
-  })
-    
-  var vertical = d3.select(".chart")
-        .append("div")
-        .attr("class", "remove")
-        .style("position", "absolute")
-        .style("z-index", "19")
-        .style("width", "1px")
-        .style("height", "380px")
-        .style("top", "10px")
-        .style("bottom", "30px")
-        .style("left", "0px")
-        .style("background", "#fff");
+      .duration(150)
+      .style('opacity', 0);
+  }
+  
+  function zoomTo(v) {
+    const k = width / v[2];
 
-  d3.select(".chart")
-      .on("mousemove", function(){  
-         mousex = d3.mouse(this);
-         mousex = mousex[0] + 5;
-         vertical.style("left", mousex + "px" )})
-      .on("mouseover", function(){  
-         mousex = d3.mouse(this);
-         mousex = mousex[0] + 5;
-         vertical.style("left", mousex + "px")});
+    view = v;
+
+    label.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+    node.attr("transform", d => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`);
+    node.attr("r", d => d.r * k);
+  }
+  
+  function zoom(d) {
+    const focus0 = focus;
+
+    focus = d;
+
+    const transition = svg.transition()
+        .duration(d3.event.altKey ? 7500 : 750)
+        .tween("zoom", d => {
+          const i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2]);
+          return t => zoomTo(i(t));
+        });
+    
+    function on_sets(d) {
+      return (d.parent === focus &&
+              focus.data.name !== "chemistry" &&
+              focus.data.name !== "medicine" &&
+              focus.data.name !== "physics");
+    }
+    
+    function off_sets(d) {
+      return (d.parent !== focus ||
+              focus.data.name === "chemistry" ||
+              focus.data.name === "medicine" ||
+              focus.data.name === "physics");
+    }
+    
+    label
+      .filter(function(d) {return (on_sets(d) || this.style.display === "inline"); })
+      .transition(transition)
+        .style("fill-opacity", d => on_sets(d) ? 1 : 0)
+        .on("start", function(d) { if (on_sets(d)) this.style.display = "inline"; })
+        .on("end", function(d) { if (off_sets(d)) this.style.display = "none"; });
+  }
+
+  return svg.node();
+
+
 });
 }
