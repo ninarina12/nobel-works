@@ -44,8 +44,8 @@ d3.json("data/data.json", function(error, root) {
       .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
       .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
       .text(function(d) { return d.children ? d.data.name.toUpperCase() : d.data.name.toUpperCase() + ": " + d.data.value; })
-      .attr("dy", function(d) {return -1.02*d.r; })
-      .style("fill", function(d) { return d.children ? "white" : color(d.depth); });
+      .style("fill", function(d) { return d.children ? "white" : color(d.depth); })
+      //.attr("dy", function(d) { return -1.02 * d.r; });
 
   /*
   var legend = svg.selectAll(".legend")
