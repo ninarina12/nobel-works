@@ -33,8 +33,8 @@ d3.json("data/data.json", function(error, root) {
       .style("fill", function(d) { return d.children ? color(d.depth) : null; })
       .style("stroke", function(d) { return d.children ? null : stars(d.r); })
       .style("stroke-width", 2)
-      .on("mouseover", on_mouseover)
-      .on("mouseout", on_mouseout)
+      //.on("mouseover", on_mouseover)
+      //.on("mouseout", on_mouseout)
       .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
   var text = g.selectAll("text")
@@ -47,6 +47,7 @@ d3.json("data/data.json", function(error, root) {
       //.attr("dy", function(d) {-1.02*d.r; })
       .style("fill", function(d) { return d.children ? "white" : color(d.depth); });
 
+/*
   var legend = g.selectAll(".legend")
       .data(nodes)
       .enter().append("g")
@@ -58,6 +59,7 @@ d3.json("data/data.json", function(error, root) {
       .attr("font-family", "Skia")
       .style("font-size", "small")
       .style("font-weight", "bold");
+*/
 
   var node = g.selectAll("circle,text");
 
@@ -89,7 +91,7 @@ d3.json("data/data.json", function(error, root) {
     node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
     circle.attr("r", function(d) { return d.r * k; });
   }
-
+/*
   function on_mouseover(d) {
     d3.select('svg #title')
       .text(d.data.name.toUpperCase())      
@@ -104,5 +106,5 @@ d3.json("data/data.json", function(error, root) {
       .duration(150)
       .style('opacity', 0);
   }
-
+*/
 });
