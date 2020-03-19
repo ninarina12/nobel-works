@@ -52,8 +52,8 @@ d3.json("data/data.json", function(error, root) {
       .enter().append("g")
         .attr("class", "legend")
         .append("text")
-          .attr("x", -diameter/2.2)
-          .attr("dy", -diameter/2.5)
+          .attr("x", -diameter / 2.2)
+          .attr("dy", -diameter / 2.5)
           .attr("id", "title")
           .style("font-size", "large");
 
