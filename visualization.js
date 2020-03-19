@@ -54,8 +54,7 @@ d3.json("data/data.json", function(error, root) {
         .append("text")
           .attr("x", -diameter / 4)
           .attr("dy", 100)
-          .attr("id", "title")
-          .style("font-size", "large");
+          .attr("id", "title");
 
   var node = g.selectAll("circle,text");
 
