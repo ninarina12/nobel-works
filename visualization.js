@@ -10,7 +10,7 @@ var color = d3.scaleOrdinal()
 var stars = d3.scaleOrdinal()
     .domain([0, 1])
     .range(["#D3B77A", "#9EC6F0", "#1D5A87", "#DE9951"])
-    
+
 var pack = d3.pack()
     .size([diameter - margin, diameter - margin])
     .padding(8);
@@ -32,6 +32,7 @@ d3.json("data/data.json", function(error, root) {
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
       .style("fill", function(d) { return d.children ? color(d.depth) : null; })
       .style("stroke", function(d) { return d.children ? null : stars(d.r); })
+      .style("stroke-width", 2)
       .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
   var text = g.selectAll("text")
@@ -41,6 +42,19 @@ d3.json("data/data.json", function(error, root) {
       .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
       .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
       .text(function(d) { return d.data.name.toUpperCase(); });
+
+  var legend = svg.selectAll(".legend")
+      .data(nodes)
+      .enter().append("g")
+      .attr("class", "legend");
+  
+  legend.append("text")
+      .attr("x", -width/2.2)
+      .attr("dy", -height/2.5)
+      .attr("id", "title")
+      .attr("font-family", "Skia")
+      .style("font-size", "small")
+      .style("font-weight", "bold");
 
   var node = g.selectAll("circle,text");
 
@@ -71,5 +85,20 @@ d3.json("data/data.json", function(error, root) {
     var k = diameter / v[2]; view = v;
     node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
     circle.attr("r", function(d) { return d.r * k; });
+  }
+
+  function on_mouseover(d) {
+    d3.select('svg #title')
+      .text(d.data.name.toUpperCase())      
+      .style("fill", "white")  
+      .transition()       
+      .style('opacity', 1);
+  }
+  
+  function on_mouseout(d) {
+    d3.select('svg #title')      
+      .transition()
+      .duration(150)
+      .style('opacity', 0);
   }
 });
