@@ -16,7 +16,7 @@ d3.json("data/data.json", function(error, root) {
   if (error) throw error;
 
   root = d3.hierarchy(root)
-      .sum(function(d) { return d.size; })
+      .sum(function(d) { return d.value; })
       .sort(function(a, b) { return b.value - a.value; });
 
   var focus = root,
