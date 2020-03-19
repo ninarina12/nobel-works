@@ -142,8 +142,6 @@ var graph = d3.json(path, function(data) {
         .on("end", function(d) { if (off_sets(d)) this.style.display = "none"; });
   }
 
-  return svg.node();
-
 
 });
 }
