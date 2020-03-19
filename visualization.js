@@ -3,10 +3,9 @@ var svg = d3.select("svg"),
     diameter = +svg.attr("width"),
     g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-var color = d3.scaleLinear()
-    .domain([-1, 5])
-    .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-    .interpolate(d3.interpolateHcl);
+var color = d3.scaleOrdinal()
+    .domain([0, 1])
+    .range(["#1E2148", "#2A2D58", "#5A5D8D"]);
 
 var pack = d3.pack()
     .size([diameter - margin, diameter - margin])
