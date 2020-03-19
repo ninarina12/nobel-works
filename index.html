@@ -10,7 +10,7 @@
       <h4> Nina Andrejevic | MIT  </h4>
       <script src="https://d3js.org/d3.v4.min.js"></script>
     </div>
-    <p> A </p>
+    <p> B </p>
     <style>
       .node {
         cursor: pointer;
@@ -22,8 +22,9 @@
       .node--leaf {
         fill: white;
       }
-      .label {
-        font: 10px "Skia", sans-serif;
+      .label,
+      .legend {
+        font: 12px "Skia", sans-serif;
         text-anchor: middle;
         font-weight: bold;
       }
@@ -31,7 +32,7 @@
       .node--root,
       .node--leaf {
         pointer-events: none;
-    }
+      }
     </style>
     <svg width="960" height="960"></svg>
     <script src="visualization.js"></script>
