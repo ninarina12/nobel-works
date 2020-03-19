@@ -43,7 +43,7 @@ d3.json("data/data.json", function(error, root) {
       .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
       .text(function(d) { return d.data.name.toUpperCase(); })
       //.style("dy", function(d) {-1.02*d.r})
-      .style("fill", function(d) {d.children ? "white" : color(d.depth)});
+      .style("fill", function(d) { return d.children ? "white" : color(d.depth); });
 
   var legend = svg.selectAll(".legend")
       .data(nodes)
