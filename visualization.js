@@ -49,8 +49,8 @@ d3.json("data/data.json", function(error, root) {
       .attr("class", "legend");
   
   legend.append("text")
-      .attr("x", -width/2.2)
-      .attr("dy", -height/2.5)
+      .attr("x", -diameter/2.2)
+      .attr("dy", -diameter/2.5)
       .attr("id", "title")
       .attr("font-family", "Skia")
       .style("font-size", "small")
