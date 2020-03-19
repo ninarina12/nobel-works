@@ -52,7 +52,7 @@ d3.json("data/data.json", function(error, root) {
       .enter().append("g")
         .attr("class", "legend")
         .append("text")
-          //.attr("x", -diameter / 2.5)
+          .attr("x", 100)
           .attr("dy", 100)
           .attr("id", "title");
 
