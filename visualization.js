@@ -44,7 +44,7 @@ d3.json("data/data.json", function(error, root) {
       .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
       .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
       .text(function(d) { return d.data.name.toUpperCase(); })
-      //.style("dy", function(d) {-1.02*d.r})
+      .attr("dy", function(d) {-1.02*d.r})
       .style("fill", function(d) { return d.children ? "white" : color(d.depth); });
 
   /*
