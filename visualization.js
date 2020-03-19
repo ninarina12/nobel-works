@@ -15,7 +15,7 @@ d3.json("data/data.json", function(error, root) {
   if (error) throw error;
 
   root = d3.hierarchy(root)
-      .sum(function(d) { return d.value; })
+      .sum(function(d) { return Math.sqrt(d.value); })
       .sort(function(a, b) { return b.value - a.value; });
 
   var focus = root,
@@ -35,7 +35,7 @@ d3.json("data/data.json", function(error, root) {
       .attr("class", "label")
       .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
       .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
-      .text(function(d) { return d.data.name; });
+      .text(function(d) { return d.data.name.toUpperCase(); });
 
   var node = g.selectAll("circle,text");
 
