@@ -63,8 +63,8 @@ d3.json("data/data.json", function(error, root) {
       .enter().append("g")
         .attr("class", "legend2")
         .append("text")
-          .attr("x", diameter - 100)
-          .attr("dy", diameter - 100)
+          .attr("x", diameter - 50)
+          .attr("dy", diameter - 50)
           .attr("id", "title2")
           .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148");
 
