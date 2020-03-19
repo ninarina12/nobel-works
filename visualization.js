@@ -45,6 +45,9 @@ d3.json("data/data.json", function(error, root) {
       .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
       .text(function(d) { return d.children ? d.data.name.toUpperCase() : d.data.name.toUpperCase() + ": " + d.data.value; })
       .style("fill", function(d) { return d.children ? "white" : color(d.depth); })
+      .style("text-shadow", function(d) {
+                              return d.children ? "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148" : "0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff";
+                            })
       .attr("dy", function(d) { return -d.r; });
 
   var legend = svg.selectAll(".legend")
