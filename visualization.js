@@ -7,6 +7,10 @@ var color = d3.scaleOrdinal()
     .domain([0, 1])
     .range(["#1E2148", "#2A2D58", "#5A5D8D"]);
 
+var stars = d3.scaleOrdinal()
+    .domain([0, 1])
+    .range(["#D3B77A", "#9EC6F0", "#1D5A87", "#DE9951"])
+    
 var pack = d3.pack()
     .size([diameter - margin, diameter - margin])
     .padding(8);
@@ -23,10 +27,11 @@ d3.json("data/data.json", function(error, root) {
       view;
 
   var circle = g.selectAll("circle")
-    .data(nodes.slice(1))
+    .data(nodes.slice(4))
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
       .style("fill", function(d) { return d.children ? color(d.depth) : null; })
+      .style("stroke", function(d) { return d.children ? null : stars(d.r); })
       .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
   var text = g.selectAll("text")
