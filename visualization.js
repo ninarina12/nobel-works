@@ -41,7 +41,8 @@ d3.json("data/data.json", function(error, root) {
       .attr("class", "label")
       .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
       .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
-      .text(function(d) { return d.data.name.toUpperCase(); });
+      .text(function(d) { return d.data.name.toUpperCase(); })
+      .attr("dy", function(d) {-1.02*d.r});
 
   var legend = svg.selectAll(".legend")
       .data(nodes)
