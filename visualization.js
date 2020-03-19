@@ -47,13 +47,13 @@ d3.json("data/data.json", function(error, root) {
       //.attr("dy", function(d) {-1.02*d.r; })
       .style("fill", function(d) { return d.children ? "white" : color(d.depth); });
 
-  var legend = g.selectAll(".legend")
+  var legend = g.selectAll("legend")
       .data(nodes)
       .enter().append("g")
       .attr("class", "legend");
       .append("text")
-      .attr("x", -diameter/2.2)
-      .attr("dy", -diameter/2.5)
+      //.attr("x", -diameter/2.2)
+      //.attr("dy", -diameter/2.5)
       .attr("id", "title")
       .attr("font-family", "Skia")
       .style("font-size", "small")
