@@ -1,7 +1,7 @@
 var svg = d3.select("svg"),
     margin = 20,
     diameter = +svg.attr("width"),
-    g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+    g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 1.5 + ")");
 
 var color = d3.scaleOrdinal()
     .domain([0, 1])
@@ -13,14 +13,14 @@ var stars = d3.scaleOrdinal()
 
 var pack = d3.pack()
     .size([diameter - margin, diameter - margin])
-    .padding(8);
+    .padding(function(d) {return 12 - d.depth});
 
 d3.json("data/data.json", function(error, root) {
   if (error) throw error;
 
   root = d3.hierarchy(root)
       .sum(function(d) { return Math.sqrt(d.value); })
-      .sort(function(a, b) { return b.value - a.value; });
+      .sort(function(d) { return d.depth - Math.sqrt(d.value); });
 
   var focus = root,
       nodes = pack(root).descendants(),
@@ -45,7 +45,7 @@ d3.json("data/data.json", function(error, root) {
       .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
       .text(function(d) { return d.children ? d.data.name.toUpperCase() : d.data.name.toUpperCase() + ": " + d.data.value; })
       .style("fill", function(d) { return d.children ? "white" : color(d.depth); })
-      .attr("dy", function(d) { return -1.02 * d.r; });
+      .attr("dy", function(d) { return -d.r; });
 
   var legend = svg.selectAll(".legend")
       .data(nodes)
