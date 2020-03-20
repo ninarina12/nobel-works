@@ -146,7 +146,7 @@ var graph = d3.csv(csvpath, function(data) {
       .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "hidden");
   })
     
-  var vertical = d3.select("#streams")
+  var vertical = d3.select("#svg_streams")
         .append("div")
         .attr("class", "remove")
         .style("position", "absolute")
@@ -158,7 +158,7 @@ var graph = d3.csv(csvpath, function(data) {
         .style("left", "0px")
         .style("background", "#fff");
 
-  d3.select("#streams")
+  d3.select("#svg_streams")
       .on("mousemove", function(){  
          mousex = d3.mouse(this);
          mousex = mousex[0] + 5;
