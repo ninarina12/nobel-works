@@ -18,19 +18,19 @@
 
 .single_vis{
     margin-bottom: 0px;
-    height: 1600px;
+    height: 1200px;
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 #bubbles{
-    width: 1600px;
+    width: 1200px;
     height: 960px;
 }
 
 #streams{
-    width: 1600px;
+    width: 1200px;
     height: 960px;
 }
 
