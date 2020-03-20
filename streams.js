@@ -33,8 +33,6 @@ d3.json("data/data.json", function(error, root) {
       .style("fill", function(d) { return d.children ? color(d.depth) : null; })
       .style("stroke", function(d) { return d.children ? null : stars(d.r); })
       .style("stroke-width", 2)
-      .on("mouseover", on_mouseover)
-      .on("mouseout", on_mouseout)
       .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
   var text = g.selectAll("text")
@@ -47,26 +45,6 @@ d3.json("data/data.json", function(error, root) {
       .style("fill", function(d) { return d.children ? "white" : color(d.depth); })
       .style("text-shadow", function(d) { return d.children ? null : "0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff, 1px 1px 0 #fff, -1px -1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff"; })
       .attr("dy", function(d) { return -d.r; });
-
-  var legend1 = svg.selectAll(".legend1")
-      .data(nodes)
-      .enter().append("g")
-        .attr("class", "legend1")
-        .append("text")
-          .attr("x", 50)
-          .attr("dy", 50)
-          .attr("id", "title1")
-          .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148");
-
-  var legend2 = svg.selectAll(".legend2")
-      .data(nodes)
-      .enter().append("g")
-        .attr("class", "legend2")
-        .append("text")
-          .attr("x", diameter - 50)
-          .attr("dy", diameter - 50)
-          .attr("id", "title2")
-          .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148");
 
   var node = g.selectAll("circle,text");
 
@@ -97,29 +75,5 @@ d3.json("data/data.json", function(error, root) {
     var k = diameter / v[2]; view = v;
     node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
     circle.attr("r", function(d) { return d.r * k; });
-  }
-
-  function on_mouseover(d) {
-    d3.select('svg #title1')
-      .text(d.data.name.toUpperCase())      
-      .style("fill", "white")  
-      .transition()       
-      .style('opacity', 1)
-    d3.select('svg #title2')
-      .text(d.data.name.toUpperCase())      
-      .style("fill", "white")  
-      .transition()       
-      .style('opacity', 1);
-  }
-  
-  function on_mouseout(d) {
-    d3.select('svg #title1')      
-      .transition()
-      .duration(150)
-      .style('opacity', 0)
-    d3.select('svg #title2')      
-      .transition()
-      .duration(150)
-      .style('opacity', 0);
   }
 });
