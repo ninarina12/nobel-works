@@ -17,7 +17,7 @@
 }
 
 .single_vis{
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     height: 1600px;
     width: 100%;
     padding-top: 10px;
@@ -26,12 +26,12 @@
 
 #bubbles{
     width: 1600px;
-    height: 1600px;
+    height: 960px;
 }
 
 #streams{
     width: 1600px;
-    height: 1600px;
+    height: 960px;
 }
 
 .text{

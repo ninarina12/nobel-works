@@ -38,6 +38,19 @@
       .node--leaf {
         pointer-events: none;
       }
+
+      .axis path, .axis line {
+        fill: none;
+        stroke: #000;
+        stroke-width: 2px;
+        shape-rendering: crispEdges;
+      }
+
+      button {
+        position: absolute;
+        right: 50px;
+        top: 10px;
+      }
     </style>
 
     <div class="page">
@@ -63,6 +76,7 @@
       </div>
     </div>
 
+    <script src="https://d3js.org/d3.v2.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="./bubbles.js"></script>
     <script src="./streams.js"></script>
