@@ -8,7 +8,7 @@
 
 .page {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1500px;
     width: 95%;
 }
 
@@ -18,20 +18,20 @@
 
 .single_vis{
     margin-bottom: 10px;
-    height: 1000px;
+    height: 1200px;
     width: 100%;
     padding-top: 100px;
     padding-bottom: 100px;
 }
 
 #bubbles{
-    width: 960px;
-    height: 960px;
+    width: 1200px;
+    height: 1200px;
 }
 
 #streams{
-    width: 960px;
-    height: 960px;
+    width: 1200px;
+    height: 1200px;
 }
 
 .text{
