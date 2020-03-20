@@ -8,8 +8,8 @@
 
 .page {
     margin: 0 auto;
-    max-width: 900px;
-    width: 90%;
+    max-width: 1200px;
+    width: 95%;
 }
 
 #vis_container{
@@ -18,18 +18,20 @@
 
 .single_vis{
     margin-bottom: 10px;
-    height: 400px;
+    height: 1000px;
     width: 100%;
     padding-top: 100px;
     padding-bottom: 100px;
 }
 
 #bubbles{
-    height: 500px;
+    width: 960px;
+    height: 960px;
 }
 
 #streams{
-    height: 300px;
+    width: 960px;
+    height: 960px;
 }
 
 .text{
@@ -39,8 +41,8 @@
     height: 100%;
     font-weight: bold;
     font-size: 20px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .text p{
