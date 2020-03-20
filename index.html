@@ -1,3 +1,5 @@
+<!doctype html>
+<meta charset="utf-8">
 <html>
   <head>
     <title> nobel works </title>
@@ -5,12 +7,6 @@
     <link rel="stylesheet" type="text/css" href="./stylesheet.css">
   </head>
   <body>
-    <div class="page">
-      <h1 class="center"> Nobel Constellations </h1>
-      <h4> Nina Andrejevic | MIT  </h4>
-      <script src="https://d3js.org/d3.v4.min.js"></script>
-    </div>
-    <p> Publication records of Nobel laureates by discipline and affiliation </p>
     <style>
       .node {
         cursor: pointer;
@@ -43,11 +39,34 @@
         pointer-events: none;
       }
     </style>
-    <svg id="svg_bubbles" width="960" height="960"></svg>
-    <script src="bubbles.js"></script>
 
-    <p> Another vizualization </p>
-    <svg id="svg_streams" width="960" height="960"></svg>
-    <script src="streams.js"></script>
+    <div class="page">
+      <h1 class="text"> Nobel Works </h1>
+      <h4> Nina Andrejevic | MIT </h4>
+    
+      <div id="vis_container">
+          <div class="single_vis" id="bubbles">
+              <div class="text">
+                Nobel Constellations
+                <p>Publication records of Nobel laureates by discipline and affiliation. </p>
+              </div>
+              <svg class="chart" id="svg_bubbles"></svg>
+          </div>
+
+          <hr/>
+
+          <div class="single_vis" id="streams">
+              <div class="text">
+                Nobel Streamgraph
+                <p>Time evolution of publications by Nobel laureates, by affiliation. </p>
+              </div>
+              <svg class="chart" id="svg_streams"></svg>
+          </div>
+      </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="./bubbles.js"></script>
+    <script src="./streams.js"></script>
   </body>
 <html>
