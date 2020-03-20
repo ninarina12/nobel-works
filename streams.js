@@ -23,7 +23,7 @@ var margin = {top: 20, right: 40, bottom: 30, left: 30};
 var width = document.body.clientWidth - margin.left - margin.right;
 var height = 400 - margin.top - margin.bottom;
 
-var tooltip = d3.select("streams")
+var tooltip = d3.select("#streams")
     .append("div")
     .attr("class", "remove")
     .style("position", "absolute")
@@ -146,7 +146,7 @@ var graph = d3.csv(csvpath, function(data) {
       .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "hidden");
   })
     
-  var vertical = d3.select("streams")
+  var vertical = d3.select("#streams")
         .append("div")
         .attr("class", "remove")
         .style("position", "absolute")
@@ -158,7 +158,7 @@ var graph = d3.csv(csvpath, function(data) {
         .style("left", "0px")
         .style("background", "#fff");
 
-  d3.select("streams")
+  d3.select("#streams")
       .on("mousemove", function(){  
          mousex = d3.mouse(this);
          mousex = mousex[0] + 5;
