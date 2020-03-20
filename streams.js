@@ -26,7 +26,7 @@ d3.json("data/data.json", function(error, root) {
       nodes = pack(root).descendants(),
       view;
 
-  var circle = g.selectAll("circle")
+  var circle = g.selectAll("stream")
     .data(nodes.slice(4))
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
@@ -35,7 +35,7 @@ d3.json("data/data.json", function(error, root) {
       .style("stroke-width", 2)
       .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
-  var text = g.selectAll("text")
+  var text = g.selectAll("stream_text")
     .data(nodes)
     .enter().append("text")
       .attr("class", "label")
@@ -46,7 +46,7 @@ d3.json("data/data.json", function(error, root) {
       .style("text-shadow", function(d) { return d.children ? null : "0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff, 1px 1px 0 #fff, -1px -1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff"; })
       .attr("dy", function(d) { return -d.r; });
 
-  var node = g.selectAll("circle,text");
+  var node = g.selectAll("stream,stream_text");
 
   svg
       .style("background", color(0))
