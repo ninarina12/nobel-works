@@ -8,7 +8,7 @@
 
 .page {
     margin: 0 auto;
-    max-width: 1800px;
+    max-width: 1400px;
     width: 95%;
 }
 
@@ -18,26 +18,26 @@
 
 .single_vis{
     margin-bottom: 0px;
-    height: 1200px;
+    height: 1280px;
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 #bubbles{
-    width: 1200px;
+    width: 1280px;
     height: 960px;
 }
 
 #streams{
-    width: 1200px;
+    width: 1280px;
     height: 960px;
 }
 
 .text{
     position: relative;
     float: left;
-    width: 15%;
+    width: 20%;
     height: 100%;
     font-weight: bold;
     font-size: 20px;
@@ -56,5 +56,5 @@
     position: relative;
     float: left;
     height: 100%;
-    width: 80%;
+    width: 75%;
 }
