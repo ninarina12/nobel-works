@@ -17,14 +17,12 @@ else if (color == "orange") {
 }
 strokecolor = colorrange[0];
 
-var format = d3.timeParse("%m/%d/%y");
-
 var margin = 10;
 var width = 960;
 var height = 400;
 
-var x = d3.scaleTime()
-    .range([0, width]);
+var x = d3.scaleLinear()
+    .range([margin, width-margin]);
 
 var y = d3.scaleLinear()
     .range([height-10, 0]);
@@ -51,7 +49,7 @@ var svg = d3.select("body").select("#svg_streams")
 
 var graph = d3.csv(csvpath, function(data) {
   data.forEach(function(d) {
-    d.date = format(d.date);
+    d.date = +d.date;
     d.value = +d.value;
   });
 
@@ -59,7 +57,7 @@ var graph = d3.csv(csvpath, function(data) {
     .keys(data.map(function(d) { return d.key; }))
     .offset(d3.stackOffsetWiggle)
     .order(d3.stackOrderInsideOut);
-    
+
   var layers = stack(nest.entries(data));
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
