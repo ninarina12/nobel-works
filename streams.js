@@ -23,19 +23,18 @@ var margin = 10;
 var width = 960;
 var height = 400;
 
-var x = d3.time.scale()
+var x = d3.scaleTime()
     .range([0, width]);
 
-var y = d3.scale.linear()
+var y = d3.scaleLinear()
     .range([height-10, 0]);
 
-var z = d3.scale.ordinal()
+var z = d3.scaleOrdinal()
     .range(colorrange);
 
 var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom")
-    .ticks(d3.time.weeks);
+    .orient("bottom");
 
 var yAxis = d3.svg.axis()
     .scale(y);
