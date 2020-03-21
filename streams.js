@@ -30,7 +30,10 @@ var y = d3.scaleLinear()
 var z = d3.scaleOrdinal()
     .range(colorrange);
 
-var xAxis = x.copy().range([margin, width - margin])
+var xAxis = g => g
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
+    .call(g => g.select(".domain").remove())
 
 var area = d3.area()
     .curve(d3.curveCardinal)
@@ -71,9 +74,8 @@ var graph = d3.csv(csvpath, function(data) {
 
 
   svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(xAxis));
+      .style("stroke", "white")
+      .call(xAxis);
 
   svg.selectAll(".layer")
       .attr("opacity", 1)
