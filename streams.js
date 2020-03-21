@@ -34,11 +34,6 @@ var z = d3.scaleOrdinal()
 
 var xAxis = x.copy().range([margin, width - margin])
 
-var stack = d3.stack()
-    .keys(data.map(function(d) { return d.key; }))
-    .offset(d3.stackOffsetWiggle)
-    .order(d3.stackOrderInsideOut);
-
 var nest = d3.nest()
     .key(function(d) { return d.key; });
 
@@ -60,6 +55,11 @@ var graph = d3.csv(csvpath, function(data) {
     d.value = +d.value;
   });
 
+  var stack = d3.stack()
+    .keys(data.map(function(d) { return d.key; }))
+    .offset(d3.stackOffsetWiggle)
+    .order(d3.stackOrderInsideOut);
+    
   var layers = stack(nest.entries(data));
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
