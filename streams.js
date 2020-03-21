@@ -34,9 +34,9 @@ var xAxis = x.copy().range([margin, width - margin])
 
 var area = d3.area()
     .curve(d3.curveCardinal)
-    .x(function(d) { return x(d.date); })
-    .y0(function(d) { return y(d.y0); })
-    .y1(function(d) { return y(d.y0 + d.y); });
+    .x(function(d) { return x(d.data.date); })
+    .y0(function(d) { return y(d[0]); })
+    .y1(function(d) { return y(d[1]); });
 
 var svg = d3.select("body").select("#svg_streams")
     .attr("width", width + margin + margin)
@@ -59,13 +59,14 @@ var graph = d3.csv(csvpath, function(data) {
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain([d3.min(layers, function(d) { return d3.min(d, function(d) {d[0];}); }), d3.max(layers, function(d) { return d3.max(d, function(d) {d[1];}); })]);
+  z.domain(groups)
 
   svg.selectAll(".layer")
       .data(layers)
     .enter().append("path")
       .attr("class", "layer")
-      .attr("d", function(d) { return area(d.values); })
-      .style("fill", function(d, i) { return z(i); });
+      .attr("d", area)
+      .style("fill", ({key}) => z(key));
 
 
   svg.append("g")
