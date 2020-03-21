@@ -31,7 +31,7 @@ var z = d3.scaleOrdinal()
     .range(colorrange);
 
 var xAxis = g => g
-    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .attr("transform", `translate(0,${height - margin})`)
     .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
     .call(g => g.select(".domain").remove())
 
