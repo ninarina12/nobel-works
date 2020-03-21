@@ -46,8 +46,8 @@ var svg = d3.select("body").select("#svg_streams")
 
 var graph = d3.csv(csvpath, function(data) {
   data.forEach(function(d) {
-    d.date = +d.date;
-    d.value = +d.value;
+    d.date = d.date;
+    d.value = d.value;
   });
 
   var stack = d3.stack()
@@ -90,7 +90,7 @@ var graph = d3.csv(csvpath, function(data) {
       .attr("stroke-width", "0.5px");
       
     })
-    
+
     .on("mouseout", function(d) {
      svg.selectAll(".layer")
       .transition()
