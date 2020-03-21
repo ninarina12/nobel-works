@@ -44,9 +44,9 @@ var svg = d3.select("body").select("#svg_streams")
   .append("g")
     .attr("transform", "translate(" + margin + "," + margin + ")");
 
-data = d3.csv(csvpath, function(data) {
+var graph = d3.csv(csvpath, function(data) {
   //data.forEach(function(d) {
-    //d.date = +d.date;
+    //d.date = d.date;
   //});
 
   var stack = d3.stack()
