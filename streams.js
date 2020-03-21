@@ -22,7 +22,7 @@ var width = 960;
 var height = 400;
 
 var x = d3.scaleLinear()
-    .range([margin, width-margin]);
+    .range([margin, width - margin]);
 
 var y = d3.scaleLinear()
     .range([height - margin, margin]);
@@ -46,8 +46,7 @@ var svg = d3.select("body").select("#svg_streams")
 
 var graph = d3.csv(csvpath, function(data) {
   data.forEach(function(d) {
-    d.date = d.date;
-    d.value = d.value;
+    d.date = +d.date;
   });
 
   var stack = d3.stack()
