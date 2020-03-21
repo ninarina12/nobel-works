@@ -32,9 +32,6 @@ var z = d3.scaleOrdinal()
 
 var xAxis = x.copy().range([margin, width - margin])
 
-var nest = d3.nest()
-    .key(function(d) { return d.key; });
-
 var area = d3.area()
     .curve(d3.curveCardinal)
     .x(function(d) { return x(d.date); })
