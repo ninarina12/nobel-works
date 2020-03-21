@@ -58,7 +58,7 @@ var graph = d3.csv(csvpath, function(data) {
 
   var layers = stack(data);
 
-  x.domain(d3.extent(data, function(d) { return d.date; }));
+  x.domain(d3.extent(data, d => d.date));
   y.domain([d3.min(layers, d => d3.min(d, d => d[0])), d3.max(layers, d => d3.max(d, d => d[1]))]);
   z.domain(data.columns.slice(1));
 
