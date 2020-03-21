@@ -106,27 +106,14 @@ var graph = d3.csv(csvpath, function(data) {
         return j != i ? 0.6 : 1;
     })})
 
-    .on("mousemove", function(d, i) {
-      mousex = d3.mouse(this);
-      mousex = mousex[0];
-      var invertedx = x.invert(mousex);
-      invertedx = invertedx.getMonth() + invertedx.getDate();
-      var selected = (d.values);
-      for (var k = 0; k < selected.length; k++) {
-        datearray[k] = selected[k].date
-        datearray[k] = datearray[k].getMonth() + datearray[k].getDate();
-      }
-
-      mousedate = datearray.indexOf(invertedx);
-      pro = d.values[mousedate].value;
-
+    .on("mousemove", function(d) {
       d3.select(this)
       .classed("hover", true)
       .attr("stroke", strokecolor)
       .attr("stroke-width", "0.5px");
       
     })
-    .on("mouseout", function(d, i) {
+    .on("mouseout", function(d) {
      svg.selectAll(".layer")
       .transition()
       .duration(250)
