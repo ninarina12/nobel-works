@@ -44,7 +44,7 @@ var svg = d3.select("body").select("#svg_streams")
   .append("g")
     .attr("transform", "translate(" + margin + "," + margin + ")");
 
-const data = d3.csv(csvpath, d3.autoType);
+var data = d3.csv(csvpath, d3.autoType);
 
   var stack = d3.stack()
     .keys(data.columns.slice(1))
