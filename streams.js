@@ -17,43 +17,26 @@ else if (color == "orange") {
 }
 strokecolor = colorrange[0];
 
-var format = d3.time.format("%m/%d/%y");
-
 var margin = 10;
 var width = 960;
 var height = 400;
 
-var x = d3.time.scale()
-    .range([0, width]);
+var x = d3.scaleLinear()
+    .range([margin, width-margin]);
 
-var y = d3.scale.linear()
+var y = d3.scaleLinear()
     .range([height-10, 0]);
 
-var z = d3.scale.ordinal()
+var z = d3.scaleOrdinal()
     .range(colorrange);
 
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom")
-    .ticks(d3.time.weeks);
-
-var yAxis = d3.svg.axis()
-    .scale(y);
-
-var yAxisr = d3.svg.axis()
-    .scale(y);
-
-var stack = d3.layout.stack()
-    .offset("silhouette")
-    .values(function(d) { return d.values; })
-    .x(function(d) { return d.date; })
-    .y(function(d) { return d.value; });
+var xAxis = x.copy().range([margin, width - margin])
 
 var nest = d3.nest()
     .key(function(d) { return d.key; });
 
-var area = d3.svg.area()
-    .interpolate("cardinal")
+var area = d3.area()
+    .curve(d3.curveCardinal)
     .x(function(d) { return x(d.date); })
     .y0(function(d) { return y(d.y0); })
     .y1(function(d) { return y(d.y0 + d.y); });
@@ -66,9 +49,14 @@ var svg = d3.select("body").select("#svg_streams")
 
 var graph = d3.csv(csvpath, function(data) {
   data.forEach(function(d) {
-    d.date = format.parse(d.date);
+    d.date = +d.date;
     d.value = +d.value;
   });
+
+  var stack = d3.stack()
+    .keys(data.map(function(d) { return d.key; }))
+    .offset(d3.stackOffsetWiggle)
+    .order(d3.stackOrderInsideOut);
 
   var layers = stack(nest.entries(data));
 
@@ -86,16 +74,7 @@ var graph = d3.csv(csvpath, function(data) {
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
-
-  svg.append("g")
-      .attr("class", "y axis")
-      .attr("transform", "translate(" + width + ", 0)")
-      .call(yAxis.orient("right"));
-
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis.orient("left"));
+      .call(d3.axisBottom(xAxis));
 
   svg.selectAll(".layer")
     .attr("opacity", 1)
