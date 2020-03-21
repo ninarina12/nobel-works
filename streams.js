@@ -35,10 +35,9 @@ var z = d3.scaleOrdinal()
 var xAxis = x.copy().range([margin, width - margin])
 
 var stack = d3.stack()
-    .offset("silhouette")
-    .values(function(d) { return d.values; })
-    .x(function(d) { return d.date; })
-    .y(function(d) { return d.value; });
+    .keys(data.map(function(d) { return d.key; }))
+    .offset(d3.stackOffsetWiggle)
+    .order(d3.stackOrderInsideOut);
 
 var nest = d3.nest()
     .key(function(d) { return d.key; });
