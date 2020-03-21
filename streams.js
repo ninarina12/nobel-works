@@ -31,7 +31,7 @@ var z = d3.scaleOrdinal()
 var xAxis = g => g
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
-    .call(g => g.select(".domain").remove())
+    //.call(g => g.select(".domain").remove())
 
 var area = d3.area()
     .curve(d3.curveCardinal)
