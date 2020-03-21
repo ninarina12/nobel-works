@@ -17,7 +17,7 @@ else if (color == "orange") {
 }
 strokecolor = colorrange[0];
 
-var margin = 10;
+var margin = 20;
 var width = 960;
 var height = 400;
 
