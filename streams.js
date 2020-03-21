@@ -17,7 +17,7 @@ else if (color == "orange") {
 }
 strokecolor = colorrange[0];
 
-var format = d3.time.format("%m/%d/%y");
+var format = d3.timeParse("%m/%d/%y");
 
 var margin = 10;
 var width = 960;
@@ -66,7 +66,7 @@ var svg = d3.select("body").select("#svg_streams")
 
 var graph = d3.csv(csvpath, function(data) {
   data.forEach(function(d) {
-    d.date = format.parse(d.date);
+    d.date = format(d.date);
     d.value = +d.value;
   });
 
