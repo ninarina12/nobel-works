@@ -44,7 +44,10 @@ var svg = d3.select("body").select("#svg_streams")
   .append("g")
     .attr("transform", "translate(" + margin + "," + margin + ")");
 
-var data = d3.csv(csvpath, d3.autoType);
+data = d3.csv(csvpath, function(data) {
+  //data.forEach(function(d) {
+    //d.date = +d.date;
+  //});
 
   var stack = d3.stack()
     .keys(data.columns.slice(1))
@@ -95,5 +98,6 @@ var data = d3.csv(csvpath, d3.autoType);
       d3.select(this)
       .classed("hover", false)
       .attr("stroke-width", "0px");
-  });
+  })
+});
 }
