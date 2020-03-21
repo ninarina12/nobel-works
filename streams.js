@@ -54,11 +54,11 @@ var graph = d3.csv(csvpath, function(data) {
   });
 
   var stack = d3.stack()
-    .keys(data.map(function(d) { return d.key; }))
+    .keys(data.columns.slice(1))
     .offset(d3.stackOffsetWiggle)
     .order(d3.stackOrderInsideOut);
 
-  var layers = stack(nest.entries(data));
+  var layers = stack(data);
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
