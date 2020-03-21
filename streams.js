@@ -32,17 +32,9 @@ var y = d3.scaleLinear()
 var z = d3.scaleOrdinal()
     .range(colorrange);
 
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
+var xAxis = x.copy().range([margin, width - margin])
 
-var yAxis = d3.svg.axis()
-    .scale(y);
-
-var yAxisr = d3.svg.axis()
-    .scale(y);
-
-var stack = d3.layout.stack()
+var stack = d3.stack()
     .offset("silhouette")
     .values(function(d) { return d.values; })
     .x(function(d) { return d.date; })
@@ -51,7 +43,7 @@ var stack = d3.layout.stack()
 var nest = d3.nest()
     .key(function(d) { return d.key; });
 
-var area = d3.svg.area()
+var area = d3.area()
     .interpolate("cardinal")
     .x(function(d) { return x(d.date); })
     .y0(function(d) { return y(d.y0); })
@@ -85,16 +77,7 @@ var graph = d3.csv(csvpath, function(data) {
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
-
-  svg.append("g")
-      .attr("class", "y axis")
-      .attr("transform", "translate(" + width + ", 0)")
-      .call(yAxis.orient("right"));
-
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis.orient("left"));
+      .call(d3.axisBottom(xAxis));
 
   svg.selectAll(".layer")
     .attr("opacity", 1)
