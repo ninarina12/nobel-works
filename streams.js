@@ -59,7 +59,7 @@ var graph = d3.csv(csvpath, function(data) {
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain([d3.min(layers, function(d) { return d3.min(d, function(d) {d[0];}); }), d3.max(layers, function(d) { return d3.max(d, function(d) {d[1];}); })]);
-  z.domain(groups)
+  z.domain(data.columns.slice(1))
 
   svg.selectAll(".layer")
       .data(layers)
