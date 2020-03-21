@@ -19,9 +19,9 @@ strokecolor = colorrange[0];
 
 var format = d3.time.format("%m/%d/%y");
 
-var margin = {top: 20, right: 40, bottom: 30, left: 30};
-var width = document.body.clientWidth - margin.left - margin.right;
-var height = 400 - margin.top - margin.bottom;
+var margin = 10;
+var width = 960;
+var height = 400;
 
 var x = d3.time.scale()
     .range([0, width]);
