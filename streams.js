@@ -25,7 +25,7 @@ var x = d3.scaleLinear()
     .range([margin, width-margin]);
 
 var y = d3.scaleLinear()
-    .range([height-10, 0]);
+    .range([height - margin, margin]);
 
 var z = d3.scaleOrdinal()
     .range(colorrange);
@@ -59,14 +59,14 @@ var graph = d3.csv(csvpath, function(data) {
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain([d3.min(layers, function(d) { return d3.min(d, function(d) {d[0];}); }), d3.max(layers, function(d) { return d3.max(d, function(d) {d[1];}); })]);
-  z.domain(data.columns.slice(1))
+  z.domain(data.columns.slice(1));
 
   svg.selectAll(".layer")
       .data(layers)
-    .enter().append("path")
-      .attr("class", "layer")
-      .attr("d", area)
-      .style("fill", ({key}) => z(key));
+      .enter().append("path")
+        .attr("class", "layer")
+        .attr("d", area)
+        .style("fill", ({key}) => z(key));
 
 
   svg.append("g")
@@ -75,13 +75,13 @@ var graph = d3.csv(csvpath, function(data) {
       .call(d3.axisBottom(xAxis));
 
   svg.selectAll(".layer")
-    .attr("opacity", 1)
-    .on("mouseover", function(d, i) {
-      svg.selectAll(".layer").transition()
-      .duration(250)
-      .attr("opacity", function(d, j) {
-        return j != i ? 0.6 : 1;
-    })})
+      .attr("opacity", 1)
+      .on("mouseover", function(d, i) {
+        svg.selectAll(".layer").transition()
+        .duration(250)
+        .attr("opacity", function(d, j) {
+          return j != i ? 0.6 : 1;
+      })})
 
     .on("mousemove", function(d) {
       d3.select(this)
@@ -90,6 +90,7 @@ var graph = d3.csv(csvpath, function(data) {
       .attr("stroke-width", "0.5px");
       
     })
+    
     .on("mouseout", function(d) {
      svg.selectAll(".layer")
       .transition()
