@@ -15,13 +15,9 @@ else if (color == "orange") {
 }
 strokecolor = colorrange[0];
 
-var svg = d3.select("body").select("#svg_streams")
-    .append("g")
-      .attr("transform", "translate(" + margin + "," + margin + ")");
-
 var margin = 20;
-var width = +svg.attr("width");
-var height = +svg.attr("height");
+var width = 960;
+var height = 400;
 
 var x = d3.scaleLinear()
     .range([margin, width - margin]);
@@ -35,13 +31,19 @@ var z = d3.scaleOrdinal()
 var xAxis = g => g
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
-    //.call(g => g.select(".domain").remove())
+    .call(g => g.select(".domain").remove())
 
 var area = d3.area()
     .curve(d3.curveCardinal)
     .x(function(d) { return x(d.data.date); })
     .y0(function(d) { return y(d[0]); })
     .y1(function(d) { return y(d[1]); });
+
+var svg = d3.select("body").select("#svg_streams")
+    .attr("width", width + margin + margin)
+    .attr("height", height + margin + margin)
+  .append("g")
+    .attr("transform", "translate(" + margin + "," + margin + ")");
 
 var graph = d3.csv(csvpath, function(data) {
   data.forEach(function(d) {
