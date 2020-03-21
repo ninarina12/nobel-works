@@ -59,10 +59,10 @@ var area = d3.svg.area()
     .y1(function(d) { return y(d.y0 + d.y); });
 
 var svg = d3.select("body").select("#svg_streams")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", width + margin + margin)
+    .attr("height", height + margin + margin)
   .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin + "," + margin + ")");
 
 var graph = d3.csv(csvpath, function(data) {
   data.forEach(function(d) {
