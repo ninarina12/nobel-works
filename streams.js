@@ -1,4 +1,4 @@
-chart("data/test_data.csv", "pink");
+chart("data/test_data.csv", "orange");
 
 var colorrange = [];
 
@@ -20,7 +20,7 @@ var width = 960;
 var height = 400;
 
 var svg = d3.select("body").select("#svg_streams")
-    .attr("width", width)
+    .attr("width", width - margin)
     .attr("height", height)
   .append("g")
     .attr("transform", "translate(" + margin + "," + margin + ")");
@@ -72,7 +72,7 @@ var graph = d3.csv(csvpath, function(data) {
 
 
   svg.append("g")
-      .attr("class", "x axis")
+      .attr("class", "axis")
       .style("stroke", "#fff")
       .call(xAxis);
 
