@@ -97,7 +97,7 @@ d3.json("data/data.json", function(error, root) {
   function zoomTo(v) {
     var k = diameter / v[2]; view = v;
     circle.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
-    text.attr("transform", function(d) { return d.children ? "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")" : "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k - 10/Math.pow(d.data.value, 0.2)*d.r + ")"; });
+    text.attr("transform", function(d) { return d.children ? "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")" : "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k - d.r + ")"; });
     circle.attr("r", function(d) { return d.r * k; });
   }
 
