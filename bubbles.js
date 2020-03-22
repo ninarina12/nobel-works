@@ -97,7 +97,7 @@ d3.json("data/data.json", function(error, root) {
   function zoomTo(v) {
     var k = diameter / v[2]; view = v;
     circle.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
-    text.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1] - 100) * k + ")"; });
+    text.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1] - 20) * k + ")"; });
     circle.attr("r", function(d) { return d.r * k; });
   }
 
