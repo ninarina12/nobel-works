@@ -78,7 +78,10 @@ var graph = d3.csv(csvpath, function(data) {
         .attr("x", 3*margin)
         .attr("dy", margin)
         .attr("id", "title")
-        .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148");
+        .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148")
+        .attr("font-family", "Skia")
+        .style("font-size", "small")
+        .style("font-weight", "bold");
 
   svg.append("g")
       .attr("class", "axis")
