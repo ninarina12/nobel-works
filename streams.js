@@ -75,8 +75,8 @@ var graph = d3.csv(csvpath, function(data) {
       .enter().append("g")
       .append("text")
         .attr("text-anchor", "end")
-        .attr("x", 4*margin)
-        .attr("dy", 2*margin)
+        .attr("x", 3*margin)
+        .attr("dy", margin)
         .attr("id", "title")
         .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148");
 
