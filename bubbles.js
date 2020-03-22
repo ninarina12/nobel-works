@@ -43,7 +43,8 @@ d3.json("data/data.json", function(error, root) {
       .attr("class", "label")
       .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
       .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
-      .text(function(d) { return d.children ? d.data.name.toUpperCase() : d.data.name.toUpperCase() + ": " + d.data.value; })
+      //.text(function(d) { return d.children ? d.data.name.toUpperCase() : d.data.name.toUpperCase() + ": " + d.data.value; })
+      .html(d => d.children ? d.data.name.toUpperCase() : "<tspan x='0' dy='1.2em'>" + d.data.name.toUpperCase() + "</tspan>" + "<tspan x='0' dy='1.2em'>" +d.data.value + "</tspan>")
       .style("fill", function(d) { return d.children ? "white" : color(d.depth); })
       .style("text-shadow", function(d) { return d.children ? null : "0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff, 1px 1px 0 #fff, -1px -1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff"; })
       .attr("dy", function(d) { return -d.r; });
@@ -68,7 +69,7 @@ d3.json("data/data.json", function(error, root) {
           .attr("id", "title2")
           .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148");
 
-  var node = g.selectAll("circle,text");
+  //var node = g.selectAll("circle,text");
 
   svg
       .style("background", color(0))
@@ -95,7 +96,8 @@ d3.json("data/data.json", function(error, root) {
 
   function zoomTo(v) {
     var k = diameter / v[2]; view = v;
-    node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+    circle.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+    text.attr("transform", function(d) { return d.children ? "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")" : "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k - 10/Math.pow(d.data.value, 0.2)*d.r + ")"; });
     circle.attr("r", function(d) { return d.r * k; });
   }
 
