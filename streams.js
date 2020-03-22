@@ -68,8 +68,20 @@ var graph = d3.csv(csvpath, function(data) {
       .enter().append("path")
         .attr("class", "layer")
         .attr("d", area)
-        .style("fill", ({key}) => z(key));
+        .style("fill", d => z(d.key));
 
+  var legend = svg.selectAll(".legend")
+      .data(layers)
+      .enter().append("g")
+      .append("text")
+        .attr("text-anchor", "end")
+        .attr("x", 4*margin)
+        .attr("dy", 2*margin)
+        .attr("id", "title")
+        .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148")
+        .attr("font-family", "Skia")
+        .style("font-size", "small")
+        .style("font-weight", "bold");
 
   svg.append("g")
       .attr("class", "axis")
@@ -79,6 +91,12 @@ var graph = d3.csv(csvpath, function(data) {
   svg.selectAll(".layer")
       .attr("opacity", 1)
       .on("mouseover", function(d, i) {
+        d3.select('#title')
+        .text(d.key.toUpperCase())      
+        .style("fill", "white")  
+        .transition()       
+        .style('opacity', 1)
+
         svg.selectAll(".layer").transition()
         .duration(150)
         .attr("opacity", function(d, j) {
@@ -94,7 +112,12 @@ var graph = d3.csv(csvpath, function(data) {
     })
 
     .on("mouseout", function(d) {
-     svg.selectAll(".layer")
+      d3.select('#title')      
+      .transition()
+      .duration(150)
+      .style('opacity', 0)
+
+      svg.selectAll(".layer")
       .transition()
       .duration(150)
       .attr("opacity", 1);
