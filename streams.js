@@ -1,4 +1,5 @@
-chart("data/test_data.csv", "blue");
+var data_file = "data/physics_data.csv"
+chart(data_file, "blue");
 
 var colorrange = [];
 
@@ -74,7 +75,7 @@ var graph = d3.csv(csvpath, function(data) {
       .data(layers)
       .enter().append("g")
       .append("text")
-        .attr("text-anchor", "end")
+        .attr("text-anchor", "start")
         .attr("x", 3*margin)
         .attr("dy", margin)
         .attr("id", "title")
