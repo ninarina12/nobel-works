@@ -89,7 +89,7 @@ var graph = d3.csv(csvpath, function(data) {
     .on("mousemove", function(d) {
       d3.select(this)
       .classed("hover", true)
-      .attr("stroke", strokecolor)
+      .attr("stroke", "#fff")
       .attr("stroke-width", 0.5);
       
     })
