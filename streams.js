@@ -1,4 +1,4 @@
-chart("data/test_data.csv", "blue");
+chart("data/test_data.csv", "pink");
 
 var colorrange = [];
 
@@ -68,39 +68,40 @@ var graph = d3.csv(csvpath, function(data) {
       .enter().append("path")
         .attr("class", "layer")
         .attr("d", area)
-        .style("fill", ({key}) => z(key));
+        .style("fill", ({key}) => z(key))
+        .style("stroke", "#fff");
 
 
   svg.append("g")
       .attr("class", "x axis")
-      .style("stroke", "white")
+      .style("stroke", "#fff")
       .call(xAxis);
 
   svg.selectAll(".layer")
       .attr("opacity", 1)
       .on("mouseover", function(d, i) {
         svg.selectAll(".layer").transition()
-        .duration(250)
+        .duration(150)
         .attr("opacity", function(d, j) {
-          return j != i ? 0.6 : 1;
+          return j != i ? 0.4 : 1;
       })})
 
     .on("mousemove", function(d) {
       d3.select(this)
       .classed("hover", true)
       .attr("stroke", strokecolor)
-      .attr("stroke-width", "0.5px");
+      .attr("stroke-width", 0.5);
       
     })
 
     .on("mouseout", function(d) {
      svg.selectAll(".layer")
       .transition()
-      .duration(250)
-      .attr("opacity", "1");
+      .duration(150)
+      .attr("opacity", 1);
       d3.select(this)
       .classed("hover", false)
-      .attr("stroke-width", "0px");
+      .attr("stroke-width", 0);
   })
 });
 }
