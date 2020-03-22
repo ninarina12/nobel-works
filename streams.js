@@ -1,4 +1,4 @@
-chart("data/test_data.csv", "pink");
+chart("data/test_data.csv", "blue");
 
 var colorrange = [];
 
@@ -16,14 +16,14 @@ else if (color == "orange") {
 strokecolor = colorrange[0];
 
 var margin = 50;
+var width = 960;
+var height = 400;
+
 var svg = d3.select("body").select("#svg_streams")
-    //.attr("width", width + margin + margin)
-    //.attr("height", height + margin + margin)
+    .attr("width", width + margin + margin)
+    .attr("height", height + margin + margin)
   .append("g")
     .attr("transform", "translate(" + margin + "," + margin + ")");
-
-var width = +svg.attr("width");
-var height = +svg.attr("height");
 
 var x = d3.scaleLinear()
     .range([margin, width - margin]);
