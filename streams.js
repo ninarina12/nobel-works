@@ -68,8 +68,7 @@ var graph = d3.csv(csvpath, function(data) {
       .enter().append("path")
         .attr("class", "layer")
         .attr("d", area)
-        .style("fill", ({key}) => z(key))
-        .style("stroke", "#fff");
+        .style("fill", ({key}) => z(key));
 
 
   svg.append("g")
@@ -90,7 +89,7 @@ var graph = d3.csv(csvpath, function(data) {
       d3.select(this)
       .classed("hover", true)
       .attr("stroke", "#fff")
-      .attr("stroke-width", 0.5);
+      .attr("stroke-width", 1);
       
     })
 
