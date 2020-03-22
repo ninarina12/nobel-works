@@ -29,7 +29,7 @@ var z = d3.scaleOrdinal()
     .range(colorrange);
 
 var xAxis = g => g
-    .attr("transform", "translate(" + margin + "," + height + ")")
+    .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
     //.call(g => g.select(".domain").remove())
 
@@ -40,8 +40,8 @@ var area = d3.area()
     .y1(function(d) { return y(d[1]); });
 
 var svg = d3.select("body").select("#svg_streams")
-    .attr("width", width + margin + margin)
-    .attr("height", height + margin + margin)
+    //.attr("width", width + margin + margin)
+    //.attr("height", height + margin + margin)
   .append("g")
     .attr("transform", "translate(" + margin + "," + margin + ")");
 
