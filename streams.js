@@ -111,26 +111,28 @@ function chart(csvpath, color) {
             return j != i ? 0.4 : 1;
         })})
 
-      .on("mousemove", function(d) {
-        d3.select(this)
-        .classed("hover", true);
-        
-      })
+        .on("mousemove", function(d) {
+          d3.select(this)
+          .classed("hover", true)
+          .attr("stroke-width", 0);
+          
+        })
 
-      .on("mouseout", function(d) {
-        d3.select('#title')      
-        .transition()
-        .duration(150)
-        .style('opacity', 0)
+        .on("mouseout", function(d) {
+          d3.select('#title')      
+          .transition()
+          .duration(150)
+          .style('opacity', 0)
 
-        svg.selectAll(".layer")
-        .transition()
-        .duration(150)
-        .attr("opacity", 1)
-        .style("fill", h => z(h.key));
-        d3.select(this)
-        .classed("hover", false)
-        .attr("stroke-width", 0);
-    })
+          svg.selectAll(".layer")
+          .transition()
+          .duration(150)
+          .attr("opacity", 1)
+          .style("fill", h => z(h.key))
+
+          d3.select(this)
+          .classed("hover", false)
+          .attr("stroke-width", 0);
+        })
   });
 }
