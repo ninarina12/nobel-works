@@ -157,6 +157,7 @@ function chart(csvpath, csvpath2, color) {
         .order(d3.stackOrderInsideOut);
 
       var layers2 = stack2(data2);
+      var prizedata = layers2.map(d => d.map( d => d.data)).flat()
       var layers2_list = Array(keydata.length).fill('')
 
       Array(keydata.length).fill().map((x,i)=>i).forEach(
