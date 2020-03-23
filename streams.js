@@ -1,7 +1,5 @@
 function filter(category){
   d3.select(".dropbtn").text(category);
-  //var svg = d3.select("body").select("#svg_streams")
-  //svg.selectAll("*").remove()
   var data_file = "data/" + category + "_data.csv"
 
   chart(data_file, "blue");
@@ -25,8 +23,10 @@ function filter(category){
     var width = 960 - 2*margin;
     var height = 400 - 2*margin;
 
-    var svg = d3.select("body").select("#svg_streams").selectAll("*").remove()
-        .attr("width", width + 2*margin)
+    var svg = d3.select("body").select("#svg_streams")
+        svg.selectAll("*").remove()
+        
+    svg.attr("width", width + 2*margin)
         .attr("height", height + 2*margin)
       .append("g")
         .attr("transform", "translate(" + margin + "," + margin + ")");
