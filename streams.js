@@ -105,7 +105,8 @@ function chart(csvpath, color) {
 
           svg.selectAll(".layer").transition()
           .duration(150)
-          .style("fill", "white")
+          .style("fill", function(d, j) {
+            return j != i ? z(d.key) : "white"})
           .attr("opacity", function(d, j) {
             return j != i ? 0.4 : 1;
         })})
@@ -126,7 +127,7 @@ function chart(csvpath, color) {
         .transition()
         .duration(150)
         .attr("opacity", 1)
-        .style("fill", d => z(d.key));
+        .style("fill", h => z(h.key));
         d3.select(this)
         .classed("hover", false)
         .attr("stroke-width", 0);
