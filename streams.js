@@ -63,7 +63,7 @@ function chart(csvpath, csvpath2, color) {
     var layers = stack(data);
 
     var steps = Math.ceil(data.columns.slice(1).length/2)
-    var colorrange = d3.merge([d3.quantize(d3.interpolateRgb("#DE9951", "#383FAF"), steps), d3.quantize(d3.interpolateRgb("#383FAF", "#DE9951"), steps)])
+    var colorrange = d3.merge([d3.quantize(d3.interpolateRgb("#DE9951", "#1D4F87"), steps), d3.quantize(d3.interpolateRgb("#1D4F87", "#DE9951"), steps)])
     var z = d3.scaleOrdinal()
       .range(colorrange)
       .domain(data.columns.slice(1).map(function(d, i) {return i; }))
