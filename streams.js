@@ -113,11 +113,11 @@ function chart(csvpath, color) {
             return j != i ? 0.4 : 1; })
         })
 
-        .on("mousemove", function(d) {
-          d3.select(this)
-          .classed("hover", true);
+        //.on("mousemove", function(d) {
+          //d3.select(this)
+          //.classed("hover", true);
           
-        })
+        //})
 
         .on("mouseout", function(d) {
           d3.select('#title')      
@@ -132,8 +132,8 @@ function chart(csvpath, color) {
           .attr("stroke-opacity", 1)
           .style("fill", h => z(h.key))
 
-          d3.select(this)
-          .classed("hover", false);
+          //d3.select(this)
+          //.classed("hover", false);
         })
   });
 }
