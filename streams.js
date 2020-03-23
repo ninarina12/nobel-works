@@ -23,7 +23,7 @@ function chart(csvpath, color) {
   var strokecolor = "#1E2148"
   var margin = 20;
   var width = 960 - 2*margin;
-  var height = 400 - 2*margin;
+  var height = 500 - 2*margin;
 
   var svg = d3.select("body").select("#svg_streams")
       .attr("width", width + 2*margin)
