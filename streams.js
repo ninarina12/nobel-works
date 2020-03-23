@@ -115,7 +115,8 @@ function chart(csvpath, color) {
 
         .on("mousemove", function(d) {
           d3.select(this)
-          .classed("hover", true);
+          .classed("hover", true)
+          .attr("stroke-width", "0px");
           
         })
 
@@ -133,7 +134,8 @@ function chart(csvpath, color) {
           .style("fill", h => z(h.key))
 
           d3.select(this)
-          .classed("hover", false);
+          .classed("hover", false)
+          .attr("stroke-width", "0px");
         })
   });
 }
