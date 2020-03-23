@@ -81,7 +81,7 @@ function chart(csvpath, color) {
         .enter().append("g")
         .append("text")
           .attr("text-anchor", "start")
-          .attr("x", 3*margin)
+          .attr("x", 2*margin)
           .attr("dy", margin)
           .attr("id", "title")
           .style("text-shadow", "0 1px 0 #1E2148, 1px 0 0 #1E2148, -1px 0 0 #1E2148, 0 -1px 0 #1E2148, 1px 1px 0 #1E2148, -1px -1px 0 #1E2148, -1px 1px 0 #1E2148, 1px -1px 0 #1E2148")
@@ -106,10 +106,12 @@ function chart(csvpath, color) {
           svg.selectAll(".layer").transition()
           .duration(150)
           .style("fill", function(d, j) {
-            return j != i ? z(d.key) : "white"})
+            return j != i ? z(d.key) : "white"; })
           .attr("opacity", function(d, j) {
-            return j != i ? 0.4 : 1;
-        })})
+            return j != i ? 0.4 : 1; })
+          .attr("stroke-opacity", function(d, j) {
+            return j != i ? 0.4 : 1; })
+        })
 
         .on("mousemove", function(d) {
           d3.select(this)
@@ -127,6 +129,7 @@ function chart(csvpath, color) {
           .transition()
           .duration(150)
           .attr("opacity", 1)
+          .attr("stroke-opacity", 1)
           .style("fill", h => z(h.key))
 
           d3.select(this)
