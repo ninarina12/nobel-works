@@ -76,6 +76,7 @@ function chart(csvpath, color) {
           .attr("class", "layer")
           .attr("d", area)
           .style("fill", d => z(d.index))
+          .attr("stroke", strokecolor)
           .attr("stroke-width", "2px");
 
     var legend = svg.selectAll(".legend")
@@ -116,7 +117,7 @@ function chart(csvpath, color) {
           d3.select(this)
           .classed("hover", true)
           .attr("stroke", strokecolor)
-          .attr("stroke-width", "2px");
+          .attr("stroke-width", "0.5px");
           
         })
 
@@ -135,5 +136,14 @@ function chart(csvpath, color) {
           .classed("hover", false)
           .attr("stroke-width", "0px");
         })
+
+    var scatter = d3.csv(csvpath, function(data2) {
+      data2.forEach(function(d) {
+        data2.columns.forEach(function(col) {
+          d[col] = +d[col];
+        });
+      });
+    });
+
   });
 }
