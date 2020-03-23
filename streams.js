@@ -116,7 +116,7 @@ function chart(csvpath, csvpath2, color) {
           d3.select(this)
           .classed("hover", true)
           .attr("stroke", strokecolor)
-          .attr("stroke-width", "0.5px");
+          .attr("stroke-width", "0px");
           
         })
 
@@ -156,7 +156,7 @@ function chart(csvpath, csvpath2, color) {
         .offset(d3.stackOffsetWiggle)
         .order(d3.stackOrderInsideOut);
 
-      var layers2 = scat_stack(data2);
+      var layers2 = stack2(data2);
       var layers2_list = Array(keydata.length).fill('')
 
       Array(keydata.length).fill().map((x,i)=>i).forEach(
