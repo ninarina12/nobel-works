@@ -74,7 +74,8 @@ function chart(csvpath, color) {
         .enter().append("path")
           .attr("class", "layer")
           .attr("d", area)
-          .style("fill", d => z(d.key));
+          .style("fill", d => z(d.key))
+          .attr("stroke", d => z(d.key));
 
     var legend = svg.selectAll(".legend")
         .data(layers)
@@ -113,8 +114,7 @@ function chart(csvpath, color) {
 
         .on("mousemove", function(d) {
           d3.select(this)
-          .classed("hover", true)
-          .attr("stroke-width", 0);
+          .classed("hover", true);
           
         })
 
@@ -131,8 +131,7 @@ function chart(csvpath, color) {
           .style("fill", h => z(h.key))
 
           d3.select(this)
-          .classed("hover", false)
-          .attr("stroke-width", 0);
+          .classed("hover", false);
         })
   });
 }
