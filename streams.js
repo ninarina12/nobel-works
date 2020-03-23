@@ -97,7 +97,7 @@ function chart(csvpath, csvpath2, color) {
         .call(xAxis);
 
     svg.selectAll(".layer")
-        .attr("opacity", 1)
+        .attr("opacity", 0.8)
         
         .on("mouseover", function(d, i) {
           d3.select('#title')
@@ -129,7 +129,7 @@ function chart(csvpath, csvpath2, color) {
           svg.selectAll(".layer")
           .transition()
           .duration(150)
-          .attr("opacity", 1)
+          .attr("opacity", 0.8)
 
           d3.select(this)
           .classed("hover", false)
