@@ -61,7 +61,8 @@
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #E7AA52;
+    font-family: 'Skia', 'Open Sans', sans-serif;
     color: white;
     padding: 10px;
     font-size: 12px;
@@ -101,5 +102,5 @@
 }
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    background-color: #D2963F;
 }
