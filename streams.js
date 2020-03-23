@@ -1,6 +1,6 @@
 function filter(category){
   d3.select(".dropbtn").text(category);
-  d3.selectAll("svg > *").remove()
+  d3.selectAll("#svg_streams > *").remove()
   var data_file = "data/" + category + "_data.csv"
   chart(data_file, "blue");
 }
