@@ -2,10 +2,10 @@ function filter(category){
   d3.select(".dropbtn").text(category);
   d3.selectAll("#svg_streams > *").remove()
   var data_file = "data/" + category + "_data.csv"
-  chart(data_file, "blue");
+  chart(data_file, "pink");
 }
 
-chart("data/chemistry_data.csv", "blue")
+chart("data/chemistry_data.csv", "pink")
 
 function chart(csvpath, color) {
   var colorrange = [];
