@@ -19,7 +19,6 @@ function chart(csvpath, color) {
   else if (color == "orange") {
     colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
   }
-  strokecolor = colorrange[0];
 
   var margin = 20;
   var width = 960 - 2*margin;
@@ -116,7 +115,7 @@ function chart(csvpath, color) {
         .on("mousemove", function(d) {
           d3.select(this)
           .classed("hover", true)
-          .style("fill", h => z(h.key))
+          .style("stroke", h => z(h.key))
           .attr("stroke-width", "0px");
           
         })
@@ -136,7 +135,8 @@ function chart(csvpath, color) {
 
           d3.select(this)
           .classed("hover", false)
-          .attr("stroke-width", "0px");
+          .attr("stroke-width", "0px")
+          .style("stroke", h => z(h.key));
         })
   });
 }
