@@ -20,6 +20,7 @@ function chart(csvpath, color) {
     colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
   }
 
+  var strokecolor = "#1E2148"
   var margin = 20;
   var width = 960 - 2*margin;
   var height = 400 - 2*margin;
@@ -108,14 +109,12 @@ function chart(csvpath, color) {
             return j != i ? z(d.key) : "white"; })
           .attr("opacity", function(d, j) {
             return j != i ? 0.4 : 1; })
-          .attr("stroke-opacity", function(d, j) {
-            return j != i ? 0.4 : 1; })
         })
 
         .on("mousemove", function(d) {
           d3.select(this)
           .classed("hover", true)
-          .style("stroke", h => z(h.key))
+          .attr("stroke", strokecolor)
           .attr("stroke-width", "0px");
           
         })
@@ -130,13 +129,11 @@ function chart(csvpath, color) {
           .transition()
           .duration(150)
           .attr("opacity", 1)
-          .attr("stroke-opacity", 1)
           .style("fill", h => z(h.key))
 
           d3.select(this)
           .classed("hover", false)
-          .attr("stroke-width", "0px")
-          .style("stroke", h => z(h.key));
+          .attr("stroke-width", "0px");
         })
   });
 }
