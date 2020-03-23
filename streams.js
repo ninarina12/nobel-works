@@ -37,9 +37,6 @@ function chart(csvpath, color) {
   var y = d3.scaleLinear()
       .range([height - margin, margin]);
 
-  var z = d3.scaleOrdinal()
-      .range(colorrange);
-
   var xAxis = g => g
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x).ticks(9).tickSizeOuter(0).tickFormat(d3.format("d")))
@@ -64,16 +61,21 @@ function chart(csvpath, color) {
 
     var layers = stack(data);
 
+    var steps = Math.ceil(data.columns.slice(1).length/2)
+    var colorrange = d3.merge([d3.quantize(d3.interpolateRgb("#DE9951", "#383FAF"), steps), d3.quantize(d3.interpolateRgb("#383FAF", "#DE9951"), steps)])
+    var z = d3.scaleOrdinal()
+      .range(colorrange)
+      .domain(data.columns.slice(1).map(function(d, i) {return i; }))
+
     x.domain(d3.extent(data, d => d.date));
     y.domain([d3.min(layers, d => d3.min(d, d => d[0])), d3.max(layers, d => d3.max(d, d => d[1]))]);
-    z.domain(data.columns.slice(1));
 
     svg.selectAll(".layer")
         .data(layers)
         .enter().append("path")
           .attr("class", "layer")
           .attr("d", area)
-          .style("fill", d => z(d.key));
+          .style("fill", d => z(d.index));
 
     var legend = svg.selectAll(".legend")
         .data(layers)
