@@ -75,7 +75,7 @@ function chart(csvpath, color) {
           .attr("class", "layer")
           .attr("d", area)
           .style("fill", d => z(d.key))
-          .attr("stroke-width", 0);
+          .style("stroke", d => z(d.key));
 
     var legend = svg.selectAll(".legend")
         .data(layers)
