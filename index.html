@@ -66,6 +66,15 @@
               <div class="text">
                 Nobel Streamgraph
                 <p> Time evolution of publications by Nobel laureates, by affiliation. </p>
+                <br>
+                <div class="dropdown">
+                  <button class="dropbtn">all</button>
+                  <div class="dropdown-content">
+                    <a onclick="filter('chemistry');">chemistry</a>
+                    <a onclick="filter('medicine');">medicine</a>
+                    <a onclick="filter('physics');">physics</a>
+                  </div>
+                </div>
               </div>
               <svg class="chart" id="svg_streams" width="960" height="400"></svg>
           </div>

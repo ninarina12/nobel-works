@@ -1,4 +1,7 @@
-var data_file = "data/physics_data.csv"
+function filter(category){
+    d3.select(".dropbtn").text(category);
+    var data_file = "data/" + category + "_data.csv"
+
 chart(data_file, "blue");
 
 var colorrange = [];
@@ -127,4 +130,5 @@ var graph = d3.csv(csvpath, function(data) {
       .attr("stroke-width", 0);
   })
 });
+}
 }
