@@ -63,6 +63,7 @@
 .dropbtn {
     background-color: #E7AA52;
     font-family: 'Skia', 'Open Sans', sans-serif;
+    font-weight: bold;
     color: white;
     padding: 10px;
     font-size: 12px;
