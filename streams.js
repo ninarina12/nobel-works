@@ -42,8 +42,7 @@ function chart(csvpath, color) {
 
   var xAxis = g => g
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).ticks(9).tickSizeOuter(0))
-      //.call(g => g.select(".domain").remove())
+      .call(d3.axisBottom(x).ticks(9).tickSizeOuter(0).tickFormat(d3.format("d")))
 
   var area = d3.area()
       .curve(d3.curveCardinal)
