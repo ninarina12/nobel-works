@@ -2,12 +2,13 @@ function filter(category){
   d3.select(".dropbtn").text(category);
   d3.selectAll("#svg_streams > *").remove()
   var data_file = "data/" + category + "_data.csv"
-  chart(data_file, "pink");
+  var data_file2 = "data/" + category + "_prizes.csv"
+  chart(data_file, data_file2, "pink");
 }
 
-chart("data/chemistry_data.csv", "pink")
+chart("data/chemistry_data.csv", "data/chemistry_prizes.csv", "pink")
 
-function chart(csvpath, color) {
+function chart(csvpath, csvpath2, color) {
   var colorrange = [];
 
   if (color == "blue") {
@@ -75,9 +76,7 @@ function chart(csvpath, color) {
         .enter().append("path")
           .attr("class", "layer")
           .attr("d", area)
-          .style("fill", d => z(d.index))
-          .attr("stroke", strokecolor)
-          .attr("stroke-width", "2px");
+          .style("fill", d => z(d.index));
 
     var legend = svg.selectAll(".legend")
         .data(layers)
@@ -137,12 +136,45 @@ function chart(csvpath, color) {
           .attr("stroke-width", "0px");
         })
 
-    var scatter = d3.csv(csvpath, function(data2) {
+    var xdata = layers.map(d => d.map( d => d.data.date)).flat()
+    var ydata = layers.map(d => d.map( d => (d[0]+d[1])/2)).flat()
+    var keydata = layers.map(d => Array(layers[0].length).fill(d.key)).flat()
+
+    var stars = d3.scaleOrdinal()
+      .domain([1, 5])
+      .range(["#D3B77A", "#9EC6F0", "#DE9951"])
+
+    var scatter = d3.csv(csvpath2, function(data2) {
       data2.forEach(function(d) {
         data2.columns.forEach(function(col) {
           d[col] = +d[col];
         });
       });
+
+      var stack2 = d3.stack()
+        .keys(data2.columns.slice(1))
+        .offset(d3.stackOffsetWiggle)
+        .order(d3.stackOrderInsideOut);
+
+      var layers2 = scat_stack(data2);
+      var layers2_list = Array(keydata.length).fill('')
+
+      Array(keydata.length).fill().map((x,i)=>i).forEach(
+        function (i) {
+        // side-effect on an array outside the function
+        layers2_list[i] = {key: keydata[i], x: x(xdata[i]), y: y(ydata[i]), value: prizedata[i][keydata[i]]};
+        })
+
+      svg.append("g")
+        .selectAll("dot")
+        .data(layers2_list)
+        .enter().append("circle")               
+           .attr("r", d => d.value)   
+           .attr("cx", d => d.x)
+           .attr("cy", d => d.y)
+           .attr("fill", "white")
+           .attr("stroke", d => stars(d.value));
+
     });
 
   });
