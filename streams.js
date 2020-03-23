@@ -75,7 +75,8 @@ function chart(csvpath, color) {
         .enter().append("path")
           .attr("class", "layer")
           .attr("d", area)
-          .style("fill", d => z(d.index));
+          .style("fill", d => z(d.index))
+          .attr("stroke-width", "2px");
 
     var legend = svg.selectAll(".legend")
         .data(layers)
@@ -115,7 +116,7 @@ function chart(csvpath, color) {
           d3.select(this)
           .classed("hover", true)
           .attr("stroke", strokecolor)
-          .attr("stroke-width", "0.5px");
+          .attr("stroke-width", "2px");
           
         })
 
