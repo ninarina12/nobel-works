@@ -116,6 +116,7 @@ function chart(csvpath, color) {
         .on("mousemove", function(d) {
           d3.select(this)
           .classed("hover", true)
+          .style("fill", h => z(h.key))
           .attr("stroke-width", "0px");
           
         })
