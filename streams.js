@@ -105,15 +105,14 @@ function chart(csvpath, color) {
 
           svg.selectAll(".layer").transition()
           .duration(150)
+          .style("fill", "white")
           .attr("opacity", function(d, j) {
             return j != i ? 0.4 : 1;
         })})
 
       .on("mousemove", function(d) {
         d3.select(this)
-        .classed("hover", true)
-        .attr("stroke", "#fff")
-        .attr("stroke-width", 1);
+        .classed("hover", true);
         
       })
 
@@ -126,7 +125,8 @@ function chart(csvpath, color) {
         svg.selectAll(".layer")
         .transition()
         .duration(150)
-        .attr("opacity", 1);
+        .attr("opacity", 1)
+        .style("fill", d => z(d.key));
         d3.select(this)
         .classed("hover", false)
         .attr("stroke-width", 0);
