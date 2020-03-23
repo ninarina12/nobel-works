@@ -42,7 +42,7 @@ function chart(csvpath, color) {
 
   var xAxis = g => g
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).ticks(function() {return [1888, 1904, 1920, 1936, 1952, 1968, 1984, 2000, 2016]}).tickSizeOuter(0))
+      .call(d3.axisBottom(x).ticks(9).tickSizeOuter(0))
       //.call(g => g.select(".domain").remove())
 
   var area = d3.area()
