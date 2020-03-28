@@ -140,7 +140,7 @@ function chart(csvpath, csvpath2, csvpath3) {
             
             .on("mouseover", function(d, i) {
               d3.select('#title')
-              .text(d.key.toUpperCase())      
+              .html("<tspan x='10' dy='1.2em'>" + d.key.toUpperCase() + "</tspan>" + "<tspan x='10' dy='1.2em'>" + cat_dict[layers2_list.find(a => a.key === d.key).cat].toUpperCase() + "</tspan>")
               .style("fill", "white")  
               .transition()       
               .style('opacity', 1)
