@@ -4,12 +4,12 @@ function filter(category){
   var data_file = "data/" + category + "_data.csv"
   var data_file2 = "data/" + category + "_prizes.csv"
   var data_file3 = "data/" + category + "_discipline.csv"
-  chart(data_file, data_file2, "pink");
+  chart(data_file, data_file2, data_file3);
 }
 
-chart("data/california institute of technology_data_data.csv",
-      "data/california institute of technology_data_prizes.csv",
-      "data/california institute of technology_data.csv")
+chart("data/california institute of technology_data.csv",
+      "data/california institute of technology_prizes.csv",
+      "data/california institute of technology_discipline.csv")
 
 function chart(csvpath, csvpath2, csvpath3) {
 
