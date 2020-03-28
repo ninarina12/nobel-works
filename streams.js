@@ -179,7 +179,7 @@ function chart(csvpath, csvpath2, csvpath3) {
           .selectAll("dot")
           .data(layers2_list)
           .enter().append("circle")               
-             .attr("r", d => d.value)   
+             .attr("r", d => 3*Math.sqrt(d.value))   
              .attr("cx", d => d.x)
              .attr("cy", d => d.y)
              .attr("fill", "white")
