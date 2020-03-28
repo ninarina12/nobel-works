@@ -1,6 +1,7 @@
 function filter(category){
   d3.select(".dropbtn").text(category);
   d3.selectAll("#svg_streams > *").remove()
+  category = category.split(" ").join("_")
   var data_file = "data/" + category + "_data.csv"
   var data_file2 = "data/" + category + "_prizes.csv"
   var data_file3 = "data/" + category + "_discipline.csv"
