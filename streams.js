@@ -8,9 +8,9 @@ function filter(category){
   chart(data_file, data_file2, data_file3);
 }
 
-chart("data/california institute of technology_data.csv",
-      "data/california institute of technology_prizes.csv",
-      "data/california institute of technology_discipline.csv")
+chart("data/california_institute_of_technology_data.csv",
+      "data/california_institute_of_technology_prizes.csv",
+      "data/california_institute_of_technology_discipline.csv")
 
 function chart(csvpath, csvpath2, csvpath3) {
 
