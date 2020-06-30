@@ -118,7 +118,7 @@ function chart(csvpath, csvpath2, csvpath3) {
               .style("fill", d => z(d.index));
 
         var legend = svg.selectAll(".legend")
-            .data(layers)
+            .data(layers2_list.slice(0,1))
             .enter().append("g")
             .append("text")
               .attr("text-anchor", "start")
@@ -140,8 +140,7 @@ function chart(csvpath, csvpath2, csvpath3) {
             
             .on("mouseover", function(d, i) {
               d3.select('#title')
-              .html("<tspan x='20' dy='1.2em'>" + d.key.toUpperCase() + "</tspan>" + "<tspan x='20' dy='1.2em'>" + cat_dict[layers2_list.find(a => a.key === d.key).cat].toUpperCase() + "</tspan>")
-              .style("fill", "white")  
+              .html("<tspan x='20' dy='1.2em'> Laureate: " + d.key.toUpperCase() + "</tspan>" + "<tspan x='17' dy='1.2em'> Discipline: " + cat_dict[layers2_list.find(a => a.key === d.key).cat].toUpperCase() + "</tspan>")              .style("fill", "white")  
               .transition()       
               .style('opacity', 1)
 
@@ -174,6 +173,19 @@ function chart(csvpath, csvpath2, csvpath3) {
               .classed("hover", false)
               .attr("stroke-width", "0px");
             })
+
+        var xlabel = svg.selectAll(".xlabel")
+            .data(layers.slice(0,1))
+            .enter().append("g")
+            .append("text")
+              .attr("text-anchor", "middle")
+              .attr("x", width/2)
+              .attr("y", height + 2*margin)
+              .attr("font-family", "Skia")
+              .style("font-size", "12px")
+              .style("font-weight", "bold")
+              .style("fill", "white")
+              .text("year");
 
         svg.append("g")
           .selectAll("dot")

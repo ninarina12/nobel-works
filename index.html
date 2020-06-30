@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <html>
   <head>
-    <title> nobel works </title>
+    <title> Nobel Works </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./stylesheet.css">
   </head>
@@ -54,28 +54,32 @@
     <div class="page">
       <h1 class="center"> Nobel Works </h1>
       <h4> Nina Andrejevic | MIT </h4>
-    
+      <p> Take a tour through the noble achievements of some of the world's brightest stars. </p>
+      <hr/>
+
       <div id="vis_container">
           <div class="single_vis" id="bubbles">
               <div class="text">
                 Nobel Constellations
-                <p> Hover: Institutions with Nobel prize recipient(s) in the surrounding discipline. <br/><br/>
-                Click: Affiliated Nobel laureates and their current record of publications. </p>
+                <p> Hover to reveal institutions with Nobel laureates in the surrounding discipline. </p>
+                <img src="images/hover_bubble.png" width="240" height= "240"/>
+                <p> Click to reveal affiliated Nobel laureates and their total record of publications. Circle areas are scaled based on the laureate's total number of publications up through the year 2016. </p>
+                <img src="images/click_bubble.png" width="240" height= "240"/>
               </div>
               <svg class="chart" id="svg_bubbles" width="960" height="960"></svg>
           </div>
 
+          <hr/>
+
           <div class="single_vis" id="streams">
               <div class="text">
-                Nobel Streamgraph
-                <p> Dropdown: Selected institutions with affiliated Nobel laureates. <br/><br/>
-                Hover: Nobel laureate and discipline in which Nobel prize was awarded. </p>
+                Nobel Lights
+                <p> Select an institution from the dropdown menu below to reveal the publication records of affiliated Nobel laureates over time. Publication data are aggregated for each laureate into 4-year bins from the year 1892 to 2016. </p>
                 <div class="dropdown">
                   <button class="dropbtn">california institute of technology</button>
                   <div class="dropdown-content">
                     <a onclick="filter('california institute of technology');">california institute of technology</a>
                     <a onclick="filter('columbia university');">columbia university</a>
-                    <a onclick="filter('cornell university');">cornell university</a>
                     <a onclick="filter('harvard university');">harvard university</a>
                     <a onclick="filter('massachusetts institute of technology');">massachusetts institute of technology</a>
                     <a onclick="filter('max planck society');">max planck society</a>
@@ -87,14 +91,33 @@
                     <a onclick="filter('yale university');">yale university</a>
                   </div>
                 </div>
+                <p> Hover to reveal affiliated Nobel laureates and the disciplines in which their Nobel prizes were awarded. Each scattered point marks the publication year of a laureate's prize-winning work(s), with the area scaled by the number of such publications occurring in that time interval. </p>
+                <img src="images/hover_stream.png" width="240" height= "240"/>
               </div>
-              <svg class="chart" id="svg_streams" width="960" height="500"></svg>
+              <svg class="chart" id="svg_streams" width="960" height="640"></svg>
           </div>
+
+          <hr/>
+
+          <div class="single_vis" id="matrix">
+              <div class="text">
+                Nobel Stars
+                <p> Prize-winning publication data for selected institutions. Each scattered point marks a prize-winning publication colored by the discipline in which the Nobel prize was awarded. The x-axis denotes the year of publication, and the y-axis indicates the year the Nobel prize was awarded. Click and drag an area selection to highlight the publications in the corresponding window across all institutions. </p>
+                <img src="images/brush_matrix.png" width="240" height="400"/>
+              </div>
+              <svg class="chart" id="svg_matrix" width="960" height="720"></svg>
+          </div>
+
+          <div class="annotation">
+              <p> <b> Data source: </b> Li, J., Yin, Y., Fortunato, S. <i> et al. </i> A dataset of publication records for Nobel laureates. <i> Sci Data </i> <b>6</b>, 33 (2019). </p>
+          </div>
+
       </div>
     </div>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="./bubbles.js"></script>
     <script src="./streams.js"></script>
+    <script src="./matrix.js"></script>
   </body>
 <html>
