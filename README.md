@@ -1,4 +1,4 @@
-# A4-Nobel-Works
+# Nobel Works
 
 Take an [interactive tour](https://github.mit.edu/pages/6894-sp20/A4-Nobel-Works/) through the noble achievements of some of the world's brightest stars!
 
@@ -18,17 +18,6 @@ Finally, we included a thin panel beside each visualization to guide users in in
 
 ## Development Process
 We began by doing an exploratory analysis of the data using different platforms such as Tableau and python, which we used to define the variables of interest for our visualizations. Then, we discussed ideas for the main encoding strategies, including the zoomable bubble diagram, streamgraph, and array of scatter plots. We generated preliminary graphs in Observable notebooks using either D3 or Vega-Lite, providing feedback to one another along the way. Once we had finalized the visualization code in the notebooks, we migrated it to a final javascript file and incorporated it into the html script on our Github repository. Other interactive and design components, such as the dropdown menu, overall color scheme, and side panel, were added along the way. Generally, the most time-consuming and challenging part was writing and debugging the code. Our team had no prior experience with html/css/javascript or D3, so we balanced the implementation complexity of our visualization and focused on ensuring the most important functionalities were successful.
-
-### Ameneh
-- Exploratory analysis (Tableau): 4 hours
-- Data wrangling (Tableau and Excel): 2 hours
-- Visualization in Observable (D3 and Vega-Lite), including learning basic javascript: 35 hours
-
-### Nina
-- Exploratory analysis (Tableau): 2-3 hours
-- Data wrangling and processing (python): 10 hours
-- Visualization in Observable (D3), including learning basic html/css/javascript: 45-50 hours
-- Webpage construction (html/css): 4-5 hours
 
 
 ## References
